@@ -97,16 +97,10 @@ $arcgis
                 submitScore:
                     $("submit-score-button"),
 
-                viewLeaderboard:
-                    $("view-leaderboard-button"),
+
 
                 closeSubmitModal:
                     $("close-submit-modal-button"),
-
-                closeLeaderboardModal:
-                    $(
-                        "close-leaderboard-modal-button"
-                    ),
             };
 
             /* =================================================================
