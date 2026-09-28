@@ -57,12 +57,7 @@ $arcgis
                     $("share-modal"),
                 submitModal:
                     $("submit-modal"),
-                leaderboardModal:
-                    $("leaderboard-modal"),
-                leaderboardLoading:
-                    $("leaderboard-loading"),
-                leaderboardList:
-                    $("leaderboard-list"),
+             
             };
 
             /* =================================================================
