@@ -192,8 +192,17 @@ window.ARCGIGUESS_CONFIG = {
                 submitScoreButton:
                     "Iesniegt rezultātu",
 
+                viewLeaderboardButton:
+                    "Rezultātu tabula",
+
                 submitModalTitle:
                     "Iesniegt rezultātu",
+
+                leaderboardModalTitle:
+                    "Labākie spēlētāji",
+
+                leaderboardLoadingText:
+                    "Notiek rezultātu tabulas ielāde...",
 
                 leaderboardError:
                     "Neizdevās ielādēt labāko rezultātu datus. Lūdzu, mēģini vēlreiz vēlāk.",
