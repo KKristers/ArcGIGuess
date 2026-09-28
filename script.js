@@ -199,7 +199,7 @@ $arcgis
              * ArcGIS Online World Imagery
              */
 
-            const IMAGERY_ZOOM = 11;
+            const IMAGERY_ZOOM = 19;
 
             let currentBasemapType =
                 null;
