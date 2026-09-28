@@ -57,7 +57,12 @@ $arcgis
                     $("share-modal"),
                 submitModal:
                     $("submit-modal"),
-             
+                leaderboardModal:
+                    $("leaderboard-modal"),
+                leaderboardLoading:
+                    $("leaderboard-loading"),
+                leaderboardList:
+                    $("leaderboard-list"),
             };
 
             /* =================================================================
@@ -92,6 +97,16 @@ $arcgis
                 submitScore:
                     $("submit-score-button"),
 
+                viewLeaderboard:
+                    $("view-leaderboard-button"),
+
+                closeSubmitModal:
+                    $("close-submit-modal-button"),
+
+                closeLeaderboardModal:
+                    $(
+                        "close-leaderboard-modal-button"
+                    ),
             };
 
             /* =================================================================
@@ -190,7 +205,7 @@ $arcgis
              * ArcGIS Online World Imagery
              */
 
-            const IMAGERY_ZOOM = 19;
+            const IMAGERY_ZOOM = 11;
 
             let currentBasemapType =
                 null;
