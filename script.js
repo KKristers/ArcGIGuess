@@ -2457,7 +2457,7 @@ $arcgis
     const rawScoreField =
         LEADERBOARD.submitScoreFieldId ||
         LEADERBOARD.scoreField ||
-        "score";
+        "rezult_ts";
 
     const scoreField =
         String(rawScoreField).replace(
