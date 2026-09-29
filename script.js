@@ -2445,85 +2445,72 @@ $arcgis
              * LEADERBOARD / SURVEY123
              * ================================================================= */
 
-            function showSubmitModal() {
+         function showSubmitModal() {
 
-                if (
-                    !LEADERBOARD.enabled ||
-                    !LEADERBOARD.survey123Url ||
-                    !LEADERBOARD.submitScoreFieldId
-                ) {
-                    return;
-                }
+    if (
+        !LEADERBOARD.enabled ||
+        !LEADERBOARD.survey123Url
+    ) {
+        return;
+    }
 
-                const fieldId =
-                    LEADERBOARD.submitScoreFieldId;
+    const rawScoreField =
+        LEADERBOARD.submitScoreFieldId ||
+        LEADERBOARD.scoreField ||
+        "score";
 
-                const params =
-                    new URLSearchParams();
+    const scoreField =
+        String(rawScoreField).replace(
+            /^field:/,
+            ""
+        );
 
-                /*
-                 * Šeit spēles rezultāts tiek automātiski padots
-                 * uz Survey123 lauku score.
-                 *
-                 * Config.js jābūt:
-                 * submitScoreFieldId: "score"
-                 */
-                params.set(
-                    fieldId,
-                    String(totalScore)
-                );
+    const safeScore =
+        Number.isFinite(Number(totalScore))
+            ? Number(totalScore)
+            : 0;
 
-                /*
-                 * Svarīgi:
-                 * Šeit NELIEKAM field:score iekš hide,
-                 * jo tu gribi redzēt rezultātu formā.
-                 */
-                params.set(
-                    "hide",
-                    "navbar,header,description,footer"
-                );
+    const separator =
+        LEADERBOARD.survey123Url.includes("?")
+            ? "&"
+            : "?";
 
-                const surveyLang =
-                    currentLang() &&
-                    currentLang().surveyLang;
+    const url =
+        `${LEADERBOARD.survey123Url}` +
+        `${separator}` +
+        `field:${scoreField}=${encodeURIComponent(String(safeScore))}` +
+        `&hide=navbar,header,description,footer`;
 
-                if (
-                    surveyLang
-                ) {
-                    params.set(
-                        "lang",
-                        surveyLang
-                    );
-                }
+    console.log(
+        "Total score:",
+        safeScore
+    );
 
-                const separator =
-                    LEADERBOARD.survey123Url.includes("?")
-                        ? "&"
-                        : "?";
+    console.log(
+        "Survey123 score field:",
+        scoreField
+    );
 
-                const url =
-                    `${LEADERBOARD.survey123Url}${separator}${params.toString()}`;
+    console.log(
+        "Survey123 submit URL:",
+        url
+    );
 
-                console.log(
-                    "Survey123 submit URL:",
-                    url
-                );
+    if (
+        $("survey-iframe")
+    ) {
+        $("survey-iframe").src =
+            url;
+    }
 
-                if (
-                    $("survey-iframe")
-                ) {
-                    $("survey-iframe").src =
-                        url;
-                }
-
-                if (
-                    panels.submitModal
-                ) {
-                    panels.submitModal.classList.remove(
-                        "hidden"
-                    );
-                }
-            }
+    if (
+        panels.submitModal
+    ) {
+        panels.submitModal.classList.remove(
+            "hidden"
+        );
+    }
+}
 
             function showLeaderboard() {
 
