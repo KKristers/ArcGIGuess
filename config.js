@@ -260,7 +260,7 @@ window.ARCGIGUESS_CONFIG = {
          * field:score=123
          */
         submitScoreFieldId:
-            "score",
+            "rezult_ts",
 
         /*
          * IMPORTANT:
@@ -277,10 +277,10 @@ window.ARCGIGUESS_CONFIG = {
          * These must match the actual field names in the Survey123 hosted feature layer.
          */
         firstNameField:
-            "first_name",
+            "v_rds",
 
         lastNameField:
-            "last_name",
+            "uzv_rds",
 
         scoreField:
             "rezult_ts",
