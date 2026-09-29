@@ -283,7 +283,7 @@ window.ARCGIGUESS_CONFIG = {
             "last_name",
 
         scoreField:
-            "score",
+            "rezult_ts",
 
         topN:
             10,
