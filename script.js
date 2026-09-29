@@ -2445,7 +2445,7 @@ $arcgis
              * LEADERBOARD / SURVEY123
              * ================================================================= */
 
-         function showSubmitModal() {
+ function showSubmitModal() {
 
     if (
         !LEADERBOARD.enabled ||
@@ -2475,6 +2475,10 @@ $arcgis
             ? "&"
             : "?";
 
+    /*
+     * Survey123 URL prefill:
+     * field:rezult_ts=123
+     */
     const url =
         `${LEADERBOARD.survey123Url}` +
         `${separator}` +
