@@ -172,7 +172,7 @@ $arcgis
              * ================================================================= */
 
             const IMAGERY_ZOOM =
-                15;
+                16;
 
             let currentBasemapType =
                 null;
