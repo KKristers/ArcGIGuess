@@ -241,51 +241,39 @@ window.ARCGIGUESS_CONFIG = {
      * 6. LEADERBOARD
      * ---------------------------------------------------------------------- */
 
-    leaderboard: {
-        enabled: true,
+ leaderboard: {
+    enabled: true,
 
-        /*
-         * Survey123 web form URL.
-         * Keep portalUrl here because your form is connected to your organization portal.
-         */
-        survey123Url:
-            "https://survey123.arcgis.com/share/ca86560c30ff4566a52adfd45b829fd0?portalUrl=https://envirotech.maps.arcgis.com",
+    survey123Url:
+        "https://survey123.arcgis.com/share/ca86560c30ff4566a52adfd45b829fd0?portalUrl=https://envirotech.maps.arcgis.com",
 
-        /*
-         * IMPORTANT:
-         * This must be the actual Survey123 question / hosted layer field name.
-         * Do NOT include "field:" here.
-         *
-         * The game logic should generate:
-         * field:score=123
-         */
-        submitScoreFieldId:
-            "rezult_ts",
+    /*
+     * Survey123 jautājuma/lauka īstais nosaukums rezultātam.
+     * Spēles kods ģenerēs:
+     * field:rezult_ts=123
+     */
+    submitScoreFieldId:
+        "rezult_ts",
 
-        /*
-         * IMPORTANT:
-         * This should point to the REST query endpoint of the SAME hosted feature layer
-         * that receives submissions from the Survey123 form above.
-         *
-         * If the leaderboard does not show new submissions, replace this URL with the
-         * REST endpoint for the "Rezultātu iesniegšana_form" layer.
-         */
-        dataApiUrl:
-            "https://services1.arcgis.com/zu8dBGfmKCvrZHh2/arcgis/rest/services/survey123_c4317eb262934df4b2fe38cb42a3d1d1_results/FeatureServer/0/query",
+    /*
+     * Šim jābūt tās pašas Survey123 rezultātu tabulas /query URL,
+     * kurā tiek iesniegti dati.
+     *
+     * Ja rezultātu tabula pēc iesniegšanas nerāda jaunos ierakstus,
+     * šis URL, visticamāk, norāda uz nepareizu slāni.
+     */
+    dataApiUrl:
+        "https://services1.arcgis.com/zu8dBGfmKCvrZHh2/arcgis/rest/services/survey123_c4317eb262934df4b2fe38cb42a3d1d1_results/FeatureServer/0/query",
 
-        /*
-         * These must match the actual field names in the Survey123 hosted feature layer.
-         */
-        firstNameField:
-            "v_rds",
+    firstNameField:
+        "v_rds",
 
-        lastNameField:
-            "uzv_rds",
+    lastNameField:
+        "uzv_rds",
 
-        scoreField:
-            "rezult_ts",
+    scoreField:
+        "rezult_ts",
 
-        topN:
-            10,
-    },
-};
+    topN:
+        10,
+},
