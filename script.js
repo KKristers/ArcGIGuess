@@ -2466,7 +2466,7 @@ $arcgis
                  * uz Survey123 lauku score.
                  *
                  * Config.js jābūt:
-                 * submitScoreFieldId: "field:score"
+                 * submitScoreFieldId: "score"
                  */
                 params.set(
                     fieldId,
