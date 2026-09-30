@@ -760,22 +760,20 @@ function randomT(
                         );
                 }
 
- if (
+if (
     $("find-landmark-text")
 ) {
-
-    $("find-landmark-text").classList.toggle(
-        "hidden",
+    $("find-landmark-text").style.display =
         currentRoundHasCustomPrompt
-    );
+            ? "none"
+            : "";
 
-    $("find-landmark-text").innerText =
-        currentRoundHasCustomPrompt
-            ? ""
-            : t(
-                  "findLandmarkText"
-              );
+    if (!currentRoundHasCustomPrompt) {
+        $("find-landmark-text").innerText =
+            t("findLandmarkText");
+    }
 }
+
 
                 if (
                     $("score-display")
