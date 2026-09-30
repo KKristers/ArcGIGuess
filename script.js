@@ -137,7 +137,11 @@ $arcgis
 
             let clickedPoint =
                 null;
+let currentRoundHasCustomPrompt =
+    false;
 
+let webmap =
+    null;
             let webmap =
                 null;
 
@@ -757,14 +761,19 @@ function randomT(
                         );
                 }
 
-                if (
-                    $("find-landmark-text")
-                ) {
-                    $("find-landmark-text").innerText =
-                        t(
-                            "findLandmarkText"
-                        );
-                }
+              if (
+    $("find-landmark-text")
+) {
+
+    $(
+        "find-landmark-text"
+    ).innerText =
+        currentRoundHasCustomPrompt
+            ? ""
+            : t(
+                  "findLandmarkText"
+              );
+}
 
                 if (
                     $("score-display")
@@ -1950,7 +1959,10 @@ const customPrompt =
     getCustomLandmarkPrompt(
         landmark
     );
-
+currentRoundHasCustomPrompt =
+    Boolean(
+        customPrompt
+    );
 const imageUrl =
     getLandmarkPhoto(
         landmark
