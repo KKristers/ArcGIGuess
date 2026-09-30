@@ -2111,11 +2111,258 @@ $arcgis
              * CONFIRM GUESS
              * ================================================================= */
 
-            function confirmGuess() {
+                       function getDistanceMeters(
+                targetGeometry,
+                guessPoint
+            ) {
+
+                if (
+                    !targetGeometry ||
+                    !guessPoint
+                ) {
+
+                    return Number.POSITIVE_INFINITY;
+                }
+
+                try {
+
+                    /*
+                     * Ja klikšķis ir poligonā, distance ir 0.
+                     */
+
+                    if (
+                        targetGeometry.type ===
+                            "polygon" &&
+                        geometryEngine.contains(
+                            targetGeometry,
+                            guessPoint
+                        )
+                    ) {
+
+                        return 0;
+                    }
+
+                    /*
+                     * Ja klikšķis ir extent iekšā, distance ir 0.
+                     */
+
+                    if (
+                        targetGeometry.type ===
+                            "extent" &&
+                        targetGeometry.contains(
+                            guessPoint
+                        )
+                    ) {
+
+                        return 0;
+                    }
+
+                    /*
+                     * Mēģinām geodēzisko distanci metros.
+                     */
+
+                    if (
+                        geometryEngine.geodesicDistance
+                    ) {
+
+                        const geodesicDistance =
+                            geometryEngine.geodesicDistance(
+                                targetGeometry,
+                                guessPoint,
+                                "meters"
+                            );
+
+                        if (
+                            typeof geodesicDistance ===
+                                "number" &&
+                            Number.isFinite(
+                                geodesicDistance
+                            ) &&
+                            !Number.isNaN(
+                                geodesicDistance
+                            )
+                        ) {
+
+                            return Math.max(
+                                0,
+                                geodesicDistance
+                            );
+                        }
+                    }
+
+                    /*
+                     * Ja geodēziskais variants neder, mēģinām parasto distanci.
+                     */
+
+                    const planarDistance =
+                        geometryEngine.distance(
+                            targetGeometry,
+                            guessPoint,
+                            "meters"
+                        );
+
+                    if (
+                        typeof planarDistance ===
+                            "number" &&
+                        Number.isFinite(
+                            planarDistance
+                        ) &&
+                        !Number.isNaN(
+                            planarDistance
+                        )
+                    ) {
+
+                        return Math.max(
+                            0,
+                            planarDistance
+                        );
+                    }
+
+                } catch (error) {
+
+                    console.warn(
+                        "geometryEngine distance failed, trying distanceOperator:",
+                        error
+                    );
+                }
+
+                /*
+                 * Rezerves variants.
+                 */
+
+                try {
+
+                    const operatorDistance =
+                        distanceOperator.execute(
+                            targetGeometry,
+                            guessPoint,
+                            {
+                                unit:
+                                    "meters",
+                            }
+                        );
+
+                    if (
+                        typeof operatorDistance ===
+                            "number" &&
+                        Number.isFinite(
+                            operatorDistance
+                        ) &&
+                        !Number.isNaN(
+                            operatorDistance
+                        )
+                    ) {
+
+                        return Math.max(
+                            0,
+                            operatorDistance
+                        );
+                    }
+
+                } catch (error) {
+
+                    console.warn(
+                        "Distance calculation failed:",
+                        error
+                    );
+                }
+
+                /*
+                 * Ja distanci nevar aprēķināt, NEATGRIEŽAM 0,
+                 * jo 0 dotu pilnus punktus.
+                 */
+
+                return Number.POSITIVE_INFINITY;
+            }
+
+            function isDirectHit(
+                targetGeometry,
+                guessPoint
+            ) {
+
+                if (
+                    !targetGeometry ||
+                    !guessPoint
+                ) {
+
+                    return false;
+                }
+
+                try {
+
+                    /*
+                     * 10 punkti tikai tad, ja klikšķis ir poligonā.
+                     */
+
+                    if (
+                        targetGeometry.type ===
+                            "polygon" &&
+                        geometryEngine.contains(
+                            targetGeometry,
+                            guessPoint
+                        )
+                    ) {
+
+                        return true;
+                    }
+
+                    if (
+                        targetGeometry.type ===
+                            "extent" &&
+                        targetGeometry.contains(
+                            guessPoint
+                        )
+                    ) {
+
+                        return true;
+                    }
+
+                } catch (error) {
+
+                    console.warn(
+                        "Hit test failed:",
+                        error
+                    );
+                }
+
+                /*
+                 * Svarīgi:
+                 * Vairs nedodam full points par 500 m robežu.
+                 * 10 punkti ir tikai poligonā.
+                 */
+
+                return false;
+            }
+                     function getResultSymbol(
+                geometry,
+                gotFullPoints
+            ) {
+
+                if (!geometry) {
+
+                    return correctPointSymbol;
+                }
+
+                if (
+                    geometry.type ===
+                        "polygon" ||
+                    geometry.type ===
+                        "extent"
+                ) {
+
+                    return gotFullPoints
+                        ? correctAreaSymbol
+                        : incorrectAreaSymbol;
+                }
+
+                return correctPointSymbol;
+            }
+                    function confirmGuess() {
 
                 if (
                     !clickedPoint
                 ) {
+
                     return;
                 }
 
@@ -2134,37 +2381,116 @@ $arcgis
 
                 const scoring =
                     CONFIG.scoring || {
-                        pointsForHit: 10,
-                        bucketMeters: 500,
-                        penaltyPerBucket: 1,
-                        minScore: 0,
+                        pointsForHit:
+                            10,
+
+                        bucketMeters:
+                            500,
+
+                        penaltyPerBucket:
+                            1,
+
+                        minScore:
+                            0,
                     };
 
-                const distanceInMeters =
-                    getDistanceMeters(
-                        targetGeometry,
-                        clickedPoint
+                let isInside =
+                    false;
+
+                let distanceInMeters =
+                    Number.POSITIVE_INFINITY;
+
+                /*
+                 * 1. Pārbaudām, vai klikšķis ir poligonā.
+                 */
+
+                try {
+
+                    isInside =
+                        isDirectHit(
+                            targetGeometry,
+                            clickedPoint
+                        );
+
+                } catch (error) {
+
+                    console.warn(
+                        "Inside check failed:",
+                        error
                     );
 
-                const hit =
-                    isDirectHit(
-                        targetGeometry,
-                        clickedPoint
-                    );
+                    isInside =
+                        false;
+                }
+
+                /*
+                 * 2. Ja ir iekšā, distance ir 0.
+                 *    Ja nav iekšā, rēķinām distanci.
+                 */
+
+                if (
+                    isInside
+                ) {
+
+                    distanceInMeters =
+                        0;
+
+                } else {
+
+                    distanceInMeters =
+                        getDistanceMeters(
+                            targetGeometry,
+                            clickedPoint
+                        );
+
+                    if (
+                        typeof distanceInMeters !==
+                            "number" ||
+                        Number.isNaN(
+                            distanceInMeters
+                        ) ||
+                        distanceInMeters < 0
+                    ) {
+
+                        distanceInMeters =
+                            Number.POSITIVE_INFINITY;
+                    }
+                }
+
+                /*
+                 * 3. Punktu aprēķins:
+                 *
+                 * Poligonā = 10 punkti
+                 * 1-500 m ārpus poligona = 9 punkti
+                 * 501-1000 m = 8 punkti
+                 * 1001-1500 m = 7 punkti
+                 * utt.
+                 */
 
                 let roundScore;
 
-                if (hit) {
+                if (
+                    isInside
+                ) {
 
                     roundScore =
                         scoring.pointsForHit;
 
+                } else if (
+                    !Number.isFinite(
+                        distanceInMeters
+                    )
+                ) {
+
+                    roundScore =
+                        scoring.minScore;
+
                 } else {
 
                     const bands =
-                        Math.floor(
+                        Math.ceil(
                             distanceInMeters /
-                            scoring.bucketMeters
+                                scoring.bucketMeters
                         );
 
                     const penalty =
@@ -2175,7 +2501,7 @@ $arcgis
                         Math.max(
                             scoring.minScore,
                             scoring.pointsForHit -
-                            penalty
+                                penalty
                         );
                 }
 
@@ -2215,14 +2541,21 @@ $arcgis
                             "incorrectTitle"
                         );
 
+                    const displayDistance =
+                        Number.isFinite(
+                            distanceInMeters
+                        )
+                            ? Math.round(
+                                  distanceInMeters
+                              )
+                            : "ļoti tālu";
+
                     resultMessage =
                         t(
                             "incorrectMessage",
                             {
                                 distance:
-                                    Math.round(
-                                        distanceInMeters
-                                    ),
+                                    displayDistance,
 
                                 roundScore:
                                     roundScore,
@@ -2241,10 +2574,14 @@ $arcgis
                     $("round-result-title")
                 ) {
 
-                    $("round-result-title").innerText =
+                    $(
+                        "round-result-title"
+                    ).innerText =
                         resultTitle;
 
-                    $("round-result-title").style.color =
+                    $(
+                        "round-result-title"
+                    ).style.color =
                         gotFullPoints
                             ? "#16a34a"
                             : "#dc2626";
@@ -2253,7 +2590,10 @@ $arcgis
                 if (
                     $("round-result-message")
                 ) {
-                    $("round-result-message").innerHTML =
+
+                    $(
+                        "round-result-message"
+                    ).innerHTML =
                         resultMessage;
                 }
 
