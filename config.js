@@ -99,8 +99,7 @@ window.ARCGIGUESS_CONFIG = {
                     "Atrodi vietu. Atceries vēsturi. Pārbaudi sevi! Mēs parādīsim vēsturiskas vietas nosaukumu un attēlu. Vai vari to atrast kartē?<br><br>{scoringSummary}",
 
                 scoringSummaryTemplate:
-    "<strong>Atrodi vietu un nopelni punktus!</strong><br><br>Atrodi norādītā objekta atrašanās vietu kartē.<br><br><strong>{points} punkti</strong> – ja vieta atrasta precīzi.<br><br>Par katriem {bucket} m no pareizās vietas tiek atņemts {penalty} punkts.",
-
+    "<strong>Atrodi vietu un nopelni punktus!</strong><br>Atrodi norādītā objekta atrašanās vietu kartē.<br><strong>{points} punkti</strong> – ja vieta atrasta precīzi.<br>Par katriem {bucket} m no pareizās vietas tiek atņemts {penalty} punkts.",
                 startButton:
                     "Sākt spēli",
 
@@ -130,7 +129,8 @@ window.ARCGIGUESS_CONFIG = {
 
                 correctMessage:
                     "Ideāli! Tu nopelnīji <strong>+{roundScore} punktus</strong>.",
-
+                incorrectTitle:
+                    "Labs mēģinājums!",
                    incorrectTitles: [
                         "Labs mēģinājums!",
                         "Gandrīz izdevās!",
