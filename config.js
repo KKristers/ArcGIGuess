@@ -277,3 +277,4 @@ window.ARCGIGUESS_CONFIG = {
     topN:
         10,
 },
+    };
