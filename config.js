@@ -23,7 +23,7 @@ window.ARCGIGUESS_CONFIG = {
     portalUrl: null,
 
     // Tava ArcGIS Web Map
-    webMapItemId: "c61a0c96c36a4397aa8542fce258a4b4",
+    webMapItemId: "483f9831bded4d478627805c4661e810",
 
     // Slāņa nosaukums Web Map
     landmarkLayerTitle: "Vietas",
