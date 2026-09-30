@@ -545,7 +545,82 @@ $arcgis
 
                 return text;
             }
+function randomT(
+    key,
+    fallbackKey,
+    replacements = {}
+) {
 
+    const active =
+        currentLang();
+
+    let values =
+        (
+            active &&
+            active.strings &&
+            active.strings[key]
+        ) ||
+        (
+            DEFAULT_LANG &&
+            DEFAULT_LANG.strings &&
+            DEFAULT_LANG.strings[key]
+        );
+
+    if (
+        Array.isArray(values) &&
+        values.length > 0
+    ) {
+
+        const randomIndex =
+            Math.floor(
+                Math.random() *
+                    values.length
+            );
+
+        let text =
+            values[randomIndex];
+
+        const replacementValues = {
+
+            appName:
+                CONFIG.appName ||
+                "",
+
+            url:
+                (
+                    CONFIG.social &&
+                    CONFIG.social.url
+                ) ||
+                "",
+
+            ...replacements,
+        };
+
+        for (
+            const [
+                placeholder,
+                value,
+            ] of Object.entries(
+                replacementValues
+            )
+        ) {
+
+            text =
+                text
+                    .split(
+                        `{${placeholder}}`
+                    )
+                    .join(value);
+        }
+
+        return text;
+    }
+
+    return t(
+        fallbackKey || key,
+        replacements
+    );
+}
             function buildScoringSummary() {
 
                 const s =
@@ -2756,10 +2831,11 @@ $arcgis
                     gotFullPoints
                 ) {
 
-                    resultTitle =
-                        t(
-                            "correctTitle"
-                        );
+                  resultTitle =
+                      randomT(
+                      "incorrectTitles",
+                      "incorrectTitle"
+                       );
 
                     resultMessage =
                         t(
