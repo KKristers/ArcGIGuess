@@ -11,6 +11,7 @@ $arcgis
         "@arcgis/core/Graphic.js",
         "@arcgis/core/request.js",
         "@arcgis/core/geometry/operators/distanceOperator.js",
+        "@arcgis/core/geometry/geometryEngine.js",
         "@arcgis/core/Basemap.js",
     ])
     .then(
@@ -20,6 +21,7 @@ $arcgis
             Graphic,
             esriRequest,
             distanceOperator,
+            geometryEngine,
             Basemap,
         ]) => {
 
@@ -1183,7 +1185,6 @@ $arcgis
             /* =================================================================
              * DISTANCE
              * ================================================================= */
-
             function getDistanceMeters(
                 targetGeometry,
                 guessPoint
@@ -1193,8 +1194,98 @@ $arcgis
                     !targetGeometry ||
                     !guessPoint
                 ) {
+
                     return 0;
                 }
+
+                try {
+
+                    /*
+                     * Ja pareizā vieta ir polygon un klikšķis ir polygon iekšā,
+                     * distancei jābūt 0.
+                     */
+
+                    if (
+                        targetGeometry.type ===
+                            "polygon"
+                    ) {
+
+                        const inside =
+                            geometryEngine.contains(
+                                targetGeometry,
+                                guessPoint
+                            );
+
+                        if (
+                            inside
+                        ) {
+
+                            return 0;
+                        }
+                    }
+
+                    /*
+                     * Ja pareizā vieta ir extent un klikšķis ir extent iekšā,
+                     * distancei jābūt 0.
+                     */
+
+                    if (
+                        targetGeometry.type ===
+                            "extent"
+                    ) {
+
+                        const inside =
+                            targetGeometry.contains(
+                                guessPoint
+                            );
+
+                        if (
+                            inside
+                        ) {
+
+                            return 0;
+                        }
+                    }
+
+                    /*
+                     * Distance metros.
+                     */
+
+                    const distance =
+                        geometryEngine.distance(
+                            targetGeometry,
+                            guessPoint,
+                            "meters"
+                        );
+
+                    if (
+                        typeof distance ===
+                            "number" &&
+                        Number.isFinite(
+                            distance
+                        ) &&
+                        !Number.isNaN(
+                            distance
+                        )
+                    ) {
+
+                        return Math.max(
+                            0,
+                            distance
+                        );
+                    }
+
+                } catch (error) {
+
+                    console.warn(
+                        "geometryEngine distance failed, trying distanceOperator:",
+                        error
+                    );
+                }
+
+                /*
+                 * Rezerves variants.
+                 */
 
                 try {
 
@@ -1209,11 +1300,16 @@ $arcgis
                         );
 
                     if (
-                        typeof distance === "number" &&
+                        typeof distance ===
+                            "number" &&
+                        Number.isFinite(
+                            distance
+                        ) &&
                         !Number.isNaN(
                             distance
                         )
                     ) {
+
                         return Math.max(
                             0,
                             distance
@@ -1231,7 +1327,7 @@ $arcgis
                 return 0;
             }
 
-            function isDirectHit(
+                       function isDirectHit(
                 targetGeometry,
                 guessPoint
             ) {
@@ -1240,7 +1336,51 @@ $arcgis
                     !targetGeometry ||
                     !guessPoint
                 ) {
+
                     return false;
+                }
+
+                try {
+
+                    /*
+                     * Ja klikšķis ir polygon iekšā,
+                     * tas ir pareizi.
+                     */
+
+                    if (
+                        targetGeometry.type ===
+                            "polygon" &&
+                        geometryEngine.contains(
+                            targetGeometry,
+                            guessPoint
+                        )
+                    ) {
+
+                        return true;
+                    }
+
+                    /*
+                     * Ja klikšķis ir extent iekšā,
+                     * tas ir pareizi.
+                     */
+
+                    if (
+                        targetGeometry.type ===
+                            "extent" &&
+                        targetGeometry.contains(
+                            guessPoint
+                        )
+                    ) {
+
+                        return true;
+                    }
+
+                } catch (error) {
+
+                    console.warn(
+                        "Hit test failed:",
+                        error
+                    );
                 }
 
                 const scoring =
@@ -1260,7 +1400,6 @@ $arcgis
                     scoring.bucketMeters
                 );
             }
-
             /* =================================================================
              * RESULT SYMBOL
              * ================================================================= */
@@ -1430,6 +1569,22 @@ $arcgis
                     query.returnGeometry =
                         true;
 
+                    /*
+                     * Svarīgi:
+                     * prasām slāņa ģeometrijas tajā pašā projekcijā,
+                     * kurā ir kartes skats.
+                     */
+
+                    if (
+                        mapEl &&
+                        mapEl.view &&
+                        mapEl.view.spatialReference
+                    ) {
+
+                        query.outSpatialReference =
+                            mapEl.view.spatialReference;
+                    }
+
                     return landmarksLayer
                         .queryFeatures(
                             query
@@ -1456,10 +1611,9 @@ $arcgis
                                     (feature) => {
 
                                         const photoUrl =
-                                            feature
-                                                .attributes[
-                                                    photoField
-                                                ];
+                                            feature.attributes[
+                                                photoField
+                                            ];
 
                                         feature.attributes.imageUrl =
                                             photoUrl
@@ -1484,15 +1638,24 @@ $arcgis
                                 if (
                                     landmarkPool[0]
                                 ) {
+
+                                    console.log(
+                                        "First feature geometry:",
+                                        landmarkPool[0]
+                                            .geometry
+                                    );
+
                                     console.log(
                                         "First feature attributes:",
-                                        landmarkPool[0].attributes
+                                        landmarkPool[0]
+                                            .attributes
                                     );
                                 }
 
                                 if (
                                     !landmarkPool.length
                                 ) {
+
                                     alert(
                                         "Netika atrasta neviena vieta."
                                     );
