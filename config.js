@@ -86,7 +86,7 @@ window.ARCGIGUESS_CONFIG = {
                     "Atrodi vietu. Atceries vēsturi. Pārbaudi sevi! Mēs parādīsim vēsturiskas vietas nosaukumu un attēlu. Vai vari to atrast kartē?<br><br>{scoringSummary}",
 
                 scoringSummaryTemplate:
-                    "Atrodi vietu vai nokļūsti {bucket} m attālumā: <strong>+{points} punkti</strong><br><strong>-{penalty} punkts</strong> par katriem {bucket} m no pareizās vietas, līdz pat {min} punktiem.",
+                    "Atrodi vietu un nopelni: <strong>+{points} punktus</strong><br><strong>-{penalty} punkts</strong> par katriem {bucket} m no pareizās vietas, līdz pat {min} punktiem.",
 
                 startButton:
                     "Sākt spēli",
