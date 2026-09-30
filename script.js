@@ -113,7 +113,7 @@ $arcgis
                     ? DEFAULT_LANG.code
                     : "lv";
 
-            /* =================================================================
+             /* =================================================================
              * GAME STATE
              * ================================================================= */
 
@@ -137,11 +137,10 @@ $arcgis
 
             let clickedPoint =
                 null;
-let currentRoundHasCustomPrompt =
-    false;
 
-let webmap =
-    null;
+            let currentRoundHasCustomPrompt =
+                false;
+
             let webmap =
                 null;
 
