@@ -1185,7 +1185,7 @@ $arcgis
             /* =================================================================
              * DISTANCE
              * ================================================================= */
-            function getDistanceMeters(
+                        function getDistanceMeters(
                 targetGeometry,
                 guessPoint
             ) {
@@ -1195,14 +1195,14 @@ $arcgis
                     !guessPoint
                 ) {
 
-                    return 0;
+                    return Number.POSITIVE_INFINITY;
                 }
 
                 try {
 
                     /*
                      * Ja pareizā vieta ir polygon un klikšķis ir polygon iekšā,
-                     * distancei jābūt 0.
+                     * distance ir 0 m.
                      */
 
                     if (
@@ -1226,7 +1226,7 @@ $arcgis
 
                     /*
                      * Ja pareizā vieta ir extent un klikšķis ir extent iekšā,
-                     * distancei jābūt 0.
+                     * distance ir 0 m.
                      */
 
                     if (
@@ -1248,10 +1248,45 @@ $arcgis
                     }
 
                     /*
-                     * Distance metros.
+                     * Vispirms mēģinām geodēzisko attālumu metros.
+                     * Tas ir drošāk kartēm ar WebMercator/WGS84 koordinātām.
                      */
 
-                    const distance =
+                    if (
+                        geometryEngine.geodesicDistance
+                    ) {
+
+                        const geodesicDistance =
+                            geometryEngine.geodesicDistance(
+                                targetGeometry,
+                                guessPoint,
+                                "meters"
+                            );
+
+                        if (
+                            typeof geodesicDistance ===
+                                "number" &&
+                            Number.isFinite(
+                                geodesicDistance
+                            ) &&
+                            !Number.isNaN(
+                                geodesicDistance
+                            )
+                        ) {
+
+                            return Math.max(
+                                0,
+                                geodesicDistance
+                            );
+                        }
+                    }
+
+                    /*
+                     * Ja geodēziskais variants neder,
+                     * mēģinām parasto geometryEngine.distance.
+                     */
+
+                    const planarDistance =
                         geometryEngine.distance(
                             targetGeometry,
                             guessPoint,
@@ -1259,19 +1294,19 @@ $arcgis
                         );
 
                     if (
-                        typeof distance ===
+                        typeof planarDistance ===
                             "number" &&
                         Number.isFinite(
-                            distance
+                            planarDistance
                         ) &&
                         !Number.isNaN(
-                            distance
+                            planarDistance
                         )
                     ) {
 
                         return Math.max(
                             0,
-                            distance
+                            planarDistance
                         );
                     }
 
@@ -1289,7 +1324,7 @@ $arcgis
 
                 try {
 
-                    const distance =
+                    const operatorDistance =
                         distanceOperator.execute(
                             targetGeometry,
                             guessPoint,
@@ -1300,19 +1335,19 @@ $arcgis
                         );
 
                     if (
-                        typeof distance ===
+                        typeof operatorDistance ===
                             "number" &&
                         Number.isFinite(
-                            distance
+                            operatorDistance
                         ) &&
                         !Number.isNaN(
-                            distance
+                            operatorDistance
                         )
                     ) {
 
                         return Math.max(
                             0,
-                            distance
+                            operatorDistance
                         );
                     }
 
@@ -1324,10 +1359,18 @@ $arcgis
                     );
                 }
 
-                return 0;
+                /*
+                 * SVARĪGI:
+                 * Ja distance neizdodas, neatgriežam 0,
+                 * jo 0 nozīmē pilnus 10 punktus.
+                 *
+                 * Atgriežam Infinity, lai rezultāts kļūst par minScore.
+                 */
+
+                return Number.POSITIVE_INFINITY;
             }
 
-                       function isDirectHit(
+                                function isDirectHit(
                 targetGeometry,
                 guessPoint
             ) {
@@ -1344,7 +1387,7 @@ $arcgis
 
                     /*
                      * Ja klikšķis ir polygon iekšā,
-                     * tas ir pareizi.
+                     * tas ir tiešs trāpījums.
                      */
 
                     if (
@@ -1361,7 +1404,7 @@ $arcgis
 
                     /*
                      * Ja klikšķis ir extent iekšā,
-                     * tas ir pareizi.
+                     * tas ir tiešs trāpījums.
                      */
 
                     if (
@@ -1394,6 +1437,15 @@ $arcgis
                         targetGeometry,
                         guessPoint
                     );
+
+                if (
+                    !Number.isFinite(
+                        distance
+                    )
+                ) {
+
+                    return false;
+                }
 
                 return (
                     distance <=
