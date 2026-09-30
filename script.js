@@ -1210,7 +1210,49 @@ function randomT(
                     "Nezināma vieta"
                 );
             }
+function getCustomLandmarkPrompt(
+    landmark
+) {
 
+    const prompts =
+        CONFIG.customLandmarkPrompts ||
+        {};
+
+    const name =
+        getLandmarkName(
+            landmark
+        );
+
+    const normalizedName =
+        String(name || "")
+            .trim()
+            .toLowerCase();
+
+    for (
+        const [
+            key,
+            value,
+        ] of Object.entries(
+            prompts
+        )
+    ) {
+
+        const normalizedKey =
+            String(key || "")
+                .trim()
+                .toLowerCase();
+
+        if (
+            normalizedKey ===
+            normalizedName
+        ) {
+
+            return value;
+        }
+    }
+
+    return null;
+}
             function getLandmarkPhoto(
                 feature
             ) {
@@ -1900,21 +1942,40 @@ function randomT(
                     ];
 
                 const name =
-                    getLandmarkName(
-                        landmark
-                    );
+    getLandmarkName(
+        landmark
+    );
 
-                const imageUrl =
-                    getLandmarkPhoto(
-                        landmark
-                    );
+const customPrompt =
+    getCustomLandmarkPrompt(
+        landmark
+    );
 
-                if (
-                    $("landmark-name")
-                ) {
-                    $("landmark-name").innerText =
-                        name;
-                }
+const imageUrl =
+    getLandmarkPhoto(
+        landmark
+    );
+
+if (
+    $("find-landmark-text")
+) {
+
+    $("find-landmark-text").innerText =
+        customPrompt
+            ? ""
+            : t(
+                  "findLandmarkText"
+              );
+}
+
+if (
+    $("landmark-name")
+) {
+
+    $("landmark-name").innerText =
+        customPrompt ||
+        name;
+}
 
                 if (
                     imageUrl &&
