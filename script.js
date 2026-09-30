@@ -1974,12 +1974,15 @@ if (
     $("find-landmark-text")
 ) {
 
-    $("find-landmark-text").innerText =
-        customPrompt
-            ? ""
-            : t(
-                  "findLandmarkText"
-              );
+    $("find-landmark-text").classList.toggle(
+        "hidden",
+        currentRoundHasCustomPrompt
+    );
+
+    if (!currentRoundHasCustomPrompt) {
+        $("find-landmark-text").innerText =
+            t("findLandmarkText");
+    }
 }
 
 if (
@@ -1990,6 +1993,7 @@ if (
         customPrompt ||
         name;
 }
+
 
                 if (
                     imageUrl &&
