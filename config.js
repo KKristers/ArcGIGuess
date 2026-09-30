@@ -42,7 +42,20 @@ window.ARCGIGUESS_CONFIG = {
 
     // Atļaut pabeigt spēli ātrāk
     allowFinishEarly: true,
-
+    bufferedFullScoreLandmarks: [
+        "Pokaiņu mežs",
+        "Staburags",
+        "Turaides pils",
+        "Moricsala",
+        "Ventas rumba",
+        "Strūves ģeodēziskā loka punkts “Jēkabpils”",
+        "Strūves ģeodēziskā loka punkts \"Jēkabpils\"",
+        "Rīgas Brāļu kapi",
+        "Rundāles pils",
+        "Āraišu ezerpils",
+        "Aglonas bazilika",
+        "Zvārtes iezis",
+    ],
     /* -------------------------------------------------------------------------
      * 3. SCORING
      * ---------------------------------------------------------------------- */
@@ -86,7 +99,7 @@ window.ARCGIGUESS_CONFIG = {
                     "Atrodi vietu. Atceries vēsturi. Pārbaudi sevi! Mēs parādīsim vēsturiskas vietas nosaukumu un attēlu. Vai vari to atrast kartē?<br><br>{scoringSummary}",
 
                 scoringSummaryTemplate:
-                    "Atrodi vietu un nopelni: <strong>+{points} punktus</strong><br><strong>-{penalty} punkts</strong> par katriem {bucket} m no pareizās vietas, līdz pat {min} punktiem.",
+    "<strong>Atrodi vietu un nopelni punktus!</strong><br><br>Atrodi norādītā objekta atrašanās vietu kartē.<br><br><strong>{points} punkti</strong> – ja vieta atrasta precīzi.<br><br>Par katriem {bucket} m no pareizās vietas tiek atņemts {penalty} punkts.",
 
                 startButton:
                     "Sākt spēli",
@@ -118,8 +131,11 @@ window.ARCGIGUESS_CONFIG = {
                 correctMessage:
                     "Ideāli! Tu nopelnīji <strong>+{roundScore} punktus</strong>.",
 
-                incorrectTitle:
-                    "Tik tuvu!",
+                   incorrectTitles: [
+                        "Labs mēģinājums!",
+                        "Gandrīz izdevās!",
+                        "Mēģini vēl precīzāk!",
+],
 
                 incorrectMessage:
                     "Tu biji <strong>{distance} m</strong> prom no pareizās vietas. Tu nopelnīji <strong>{roundScore} punktus</strong>. Šeit ir pareizā lokācija.",
