@@ -42,6 +42,19 @@ window.ARCGIGUESS_CONFIG = {
 
     // Atļaut pabeigt spēli ātrāk
     allowFinishEarly: true,
+    customLandmarkPrompts: {
+    "Staburags":
+        "Kur atrodas šī klints?",
+
+    "Ķemeru Nacionālais parks":
+        "Kur atrodas šis nacionālais parks?",
+
+    "Rundāles pils":
+        "Kur atrodas šī pils?",
+
+    "Aglonas bazilika":
+        "Kur atrodas šī vieta?",
+},
     bufferedFullScoreLandmarks: [
         "Pokaiņu mežs",
         "Staburags",
