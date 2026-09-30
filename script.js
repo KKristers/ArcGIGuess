@@ -760,13 +760,16 @@ function randomT(
                         );
                 }
 
-              if (
+ if (
     $("find-landmark-text")
 ) {
 
-    $(
-        "find-landmark-text"
-    ).innerText =
+    $("find-landmark-text").classList.toggle(
+        "hidden",
+        currentRoundHasCustomPrompt
+    );
+
+    $("find-landmark-text").innerText =
         currentRoundHasCustomPrompt
             ? ""
             : t(
