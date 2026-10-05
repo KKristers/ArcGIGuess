@@ -2910,7 +2910,8 @@ if (
         roundScore: roundScore,
     } );
     accuracyTracker.push( 1 );
-} else {
+}
+               else {
 
                     /*
                      * Ja tev ir randomT() funkcija un incorrectTitles masīvs,
