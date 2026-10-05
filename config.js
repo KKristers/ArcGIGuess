@@ -55,20 +55,11 @@ window.ARCGIGUESS_CONFIG = {
     "Aglonas bazilika":
         "Kur atrodas šī vieta?",
 },
-    bufferedFullScoreLandmarks: [
-        "Pokaiņu mežs",
-        "Staburags",
-        "Turaides pils",
-        "Moricsala",
-        "Ventas rumba",
-        "Strūves ģeodēziskā loka punkts “Jēkabpils”",
-        "Strūves ģeodēziskā loka punkts \"Jēkabpils\"",
-        "Rīgas Brāļu kapi",
-        "Rundāles pils",
-        "Āraišu ezerpils",
-        "Aglonas bazilika",
-        "Zvārtes iezis",
-    ],
+ noFullScoreBufferLandmarks: [
+    "Abavas senleja",
+    "Ķemeru Nacionālais parks",
+    "Ķemeru nacionālais parks",
+],
     /* -------------------------------------------------------------------------
      * 3. SCORING
      * ---------------------------------------------------------------------- */
