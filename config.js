@@ -159,7 +159,7 @@ window.ARCGIGUESS_CONFIG = {
                 /* GAME OVER */
 
                 gameOverTitle:
-                    "Spēle beidzās!",
+                    "Paldies par piedalīšanos!",
 
                 finalScoreText:
                     "Lūk, tavi rezultāti:",
