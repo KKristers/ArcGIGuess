@@ -776,20 +776,7 @@ function updateFindLandmarkTextVisibility() {
                             "loadingText"
                         );
                 }
-
-if ( $("find-landmark-text") ) {
-    if ( currentRoundHasCustomPrompt ) {
-        $("find-landmark-text").classList.add( "hidden" );
-        $("find-landmark-text").style.display = "none";
-        $("find-landmark-text").innerText = "";
-    } else {
-        $("find-landmark-text").classList.remove( "hidden" );
-        $("find-landmark-text").style.display = "";
-        $("find-landmark-text").innerText = t( "findLandmarkText" );
-    }
-}
-
-
+              updateFindLandmarkTextVisibility();
                 if (
                     $("score-display")
                 ) {
