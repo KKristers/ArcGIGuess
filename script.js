@@ -1960,7 +1960,7 @@ function getCustomLandmarkPrompt(
                         currentLandmarkIndex
                     ];
 
-               const name = getLandmarkName( landmark );
+            const name = getLandmarkName( landmark );
 
 const nameLooksLikePrompt =
     String( name || "" )
