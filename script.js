@@ -1973,10 +1973,19 @@ currentRoundHasCustomPrompt =
     Boolean(
         customPrompt
     );
+             console.log(
+    "DEBUG custom prompt:",
+    {
+        name: name,
+        customPrompt: customPrompt,
+        currentRoundHasCustomPrompt: currentRoundHasCustomPrompt,
+    }
+);
 const imageUrl =
     getLandmarkPhoto(
         landmark
     );
+             
 updateFindLandmarkTextVisibility();
 
 if ( $("landmark-name") ) {
