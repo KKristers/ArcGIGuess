@@ -760,17 +760,15 @@ function randomT(
                         );
                 }
 
-if (
-    $("find-landmark-text")
-) {
-    $("find-landmark-text").style.display =
-        currentRoundHasCustomPrompt
-            ? "none"
-            : "";
-
-    if (!currentRoundHasCustomPrompt) {
-        $("find-landmark-text").innerText =
-            t("findLandmarkText");
+if ( $("find-landmark-text") ) {
+    if ( currentRoundHasCustomPrompt ) {
+        $("find-landmark-text").classList.add( "hidden" );
+        $("find-landmark-text").style.display = "none";
+        $("find-landmark-text").innerText = "";
+    } else {
+        $("find-landmark-text").classList.remove( "hidden" );
+        $("find-landmark-text").style.display = "";
+        $("find-landmark-text").innerText = t( "findLandmarkText" );
     }
 }
 
@@ -1968,21 +1966,17 @@ const imageUrl =
         landmark
     );
 
-if (
-    $("find-landmark-text")
-) {
-
-    $("find-landmark-text").classList.toggle(
-        "hidden",
-        currentRoundHasCustomPrompt
-    );
-
-    if (!currentRoundHasCustomPrompt) {
-        $("find-landmark-text").innerText =
-            t("findLandmarkText");
+if ( $("find-landmark-text") ) {
+    if ( currentRoundHasCustomPrompt ) {
+        $("find-landmark-text").classList.add( "hidden" );
+        $("find-landmark-text").style.display = "none";
+        $("find-landmark-text").innerText = "";
+    } else {
+        $("find-landmark-text").classList.remove( "hidden" );
+        $("find-landmark-text").style.display = "";
+        $("find-landmark-text").innerText = t( "findLandmarkText" );
     }
 }
-
 if (
     $("landmark-name")
 ) {
