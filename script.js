@@ -2528,29 +2528,16 @@ if (
                     );
             }
 
-            function isBufferedFullScoreLandmark(
-                landmark
-            ) {
+function shouldUseFullScoreBuffer( landmark ) {
+    const excludedNames = CONFIG.noFullScoreBufferLandmarks || [];
+    const currentName = normalizeLandmarkName( getLandmarkName( landmark ) );
 
-                const bufferedNames =
-                    CONFIG.bufferedFullScoreLandmarks ||
-                    [];
+    const isExcluded = excludedNames.some( (name) =>
+        normalizeLandmarkName( name ) === currentName
+    );
 
-                const currentName =
-                    normalizeLandmarkName(
-                        getLandmarkName(
-                            landmark
-                        )
-                    );
-
-                return bufferedNames.some(
-                    (name) =>
-                        normalizeLandmarkName(
-                            name
-                        ) ===
-                        currentName
-                );
-            }
+    return !isExcluded;
+}
 
             function getDistanceMeters(
                 targetGeometry,
@@ -2775,10 +2762,7 @@ if (
                             0,
                     };
 
-                const hasFullScoreBuffer =
-                    isBufferedFullScoreLandmark(
-                        targetLandmark
-                    );
+          const hasFullScoreBuffer = shouldUseFullScoreBuffer( targetLandmark );
 
                 const isInside =
                     isInsideGeometry(
