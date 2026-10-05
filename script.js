@@ -2904,30 +2904,13 @@ if (
                 let resultTitle;
                 let resultMessage;
 
-                if (
-                    gotFullPoints
-                ) {
-
-                  resultTitle =
-                      randomT(
-                      "incorrectTitles",
-                      "incorrectTitle"
-                       );
-
-                    resultMessage =
-                        t(
-                            "correctMessage",
-                            {
-                                roundScore:
-                                    roundScore,
-                            }
-                        );
-
-                    accuracyTracker.push(
-                        1
-                    );
-
-                } else {
+               if ( gotFullPoints ) {
+    resultTitle = t( "correctTitle" );
+    resultMessage = t( "correctMessage", {
+        roundScore: roundScore,
+    } );
+    accuracyTracker.push( 1 );
+} else {
 
                     /*
                      * Ja tev ir randomT() funkcija un incorrectTitles masīvs,
