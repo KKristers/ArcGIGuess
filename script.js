@@ -685,7 +685,24 @@ function randomT(
                     );
                 }
             }
+function updateFindLandmarkTextVisibility() {
+    const el =
+        $("find-landmark-text");
 
+    if ( !el ) {
+        return;
+    }
+
+    if ( currentRoundHasCustomPrompt ) {
+        el.classList.add( "hidden" );
+        el.style.display = "none";
+        el.innerText = "";
+    } else {
+        el.classList.remove( "hidden" );
+        el.style.display = "";
+        el.innerText = t( "findLandmarkText" );
+    }
+}
             function updateUI() {
 
                 const activeLang =
@@ -1965,25 +1982,11 @@ const imageUrl =
     getLandmarkPhoto(
         landmark
     );
+updateFindLandmarkTextVisibility();
 
-if ( $("find-landmark-text") ) {
-    if ( currentRoundHasCustomPrompt ) {
-        $("find-landmark-text").classList.add( "hidden" );
-        $("find-landmark-text").style.display = "none";
-        $("find-landmark-text").innerText = "";
-    } else {
-        $("find-landmark-text").classList.remove( "hidden" );
-        $("find-landmark-text").style.display = "";
-        $("find-landmark-text").innerText = t( "findLandmarkText" );
-    }
-}
-if (
-    $("landmark-name")
-) {
-
+if ( $("landmark-name") ) {
     $("landmark-name").innerText =
-        customPrompt ||
-        name;
+        customPrompt || name;
 }
 
 
