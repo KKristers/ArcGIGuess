@@ -686,8 +686,7 @@ function randomT(
                 }
             }
 function updateFindLandmarkTextVisibility() {
-    const el =
-        $("find-landmark-text");
+    const el = $("find-landmark-text");
 
     if ( !el ) {
         return;
@@ -695,13 +694,22 @@ function updateFindLandmarkTextVisibility() {
 
     if ( currentRoundHasCustomPrompt ) {
         el.classList.add( "hidden" );
-        el.style.display = "none";
+        el.style.setProperty( "display", "none", "important" );
+        el.style.visibility = "hidden";
+        el.style.height = "0";
+        el.style.margin = "0";
+        el.style.padding = "0";
         el.innerText = "";
-    } else {
-        el.classList.remove( "hidden" );
-        el.style.display = "";
-        el.innerText = t( "findLandmarkText" );
+        return;
     }
+
+    el.classList.remove( "hidden" );
+    el.style.removeProperty( "display" );
+    el.style.visibility = "";
+    el.style.height = "";
+    el.style.margin = "";
+    el.style.padding = "";
+    el.innerText = t( "findLandmarkText" );
 }
             function updateUI() {
 
@@ -2064,9 +2072,17 @@ if ( $("landmark-name") ) {
                     }
                 }
 
-                gameState = "PLAYING";
+               gameState = "PLAYING";
 clicksEnabled = true;
+
+if ( $("landmark-name") ) {
+    $("landmark-name").innerText =
+        customPrompt || name;
+}
+
+updateFindLandmarkTextVisibility();
 updateUI();
+updateFindLandmarkTextVisibility();
 
 setTimeout(() => {
     updateFindLandmarkTextVisibility();
