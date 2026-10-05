@@ -2064,13 +2064,13 @@ if ( $("landmark-name") ) {
                     }
                 }
 
-                gameState =
-                    "PLAYING";
+                gameState = "PLAYING";
+clicksEnabled = true;
+updateUI();
 
-                clicksEnabled =
-                    true;
-
-                updateUI();
+setTimeout(() => {
+    updateFindLandmarkTextVisibility();
+}, 0);
             }
 
             /* =================================================================
