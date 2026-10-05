@@ -1960,31 +1960,38 @@ function getCustomLandmarkPrompt(
                         currentLandmarkIndex
                     ];
 
-                const name =
-    getLandmarkName(
-        landmark
-    );
+               const name = getLandmarkName( landmark );
+
+const nameLooksLikePrompt =
+    String( name || "" )
+        .trim()
+        .toLowerCase()
+        .startsWith( "kur atrodas" );
 
 const customPrompt =
-    getCustomLandmarkPrompt(
-        landmark
+    getCustomLandmarkPrompt( landmark ) ||
+    (
+        nameLooksLikePrompt
+            ? name
+            : null
     );
+
 currentRoundHasCustomPrompt =
     Boolean(
         customPrompt
     );
-             console.log(
+
+console.log(
     "DEBUG custom prompt:",
     {
         name: name,
+        nameLooksLikePrompt: nameLooksLikePrompt,
         customPrompt: customPrompt,
         currentRoundHasCustomPrompt: currentRoundHasCustomPrompt,
     }
 );
-const imageUrl =
-    getLandmarkPhoto(
-        landmark
-    );
+
+const imageUrl = getLandmarkPhoto( landmark );
              
 updateFindLandmarkTextVisibility();
 
