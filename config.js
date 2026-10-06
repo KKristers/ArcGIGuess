@@ -42,18 +42,14 @@ window.ARCGIGUESS_CONFIG = {
 
     // Atļaut pabeigt spēli ātrāk
     allowFinishEarly: true,
-    customLandmarkPrompts: {
-    "Staburags":
-        "Kur atrodas šī klints?",
-
-    "Ķemeru Nacionālais parks":
-        "Kur atrodas šis nacionālais parks?",
-
-    "Rundāles pils":
-        "Kur atrodas šī pils?",
-
-    "Aglonas bazilika":
-        "Kur atrodas šī vieta?",
+   customLandmarkPrompts: {
+  "Ventas rumba": "Kur atrodas Eiropas platākais ūdenskritums?",
+  "Staburags": "Kur Daugavas ūdeņi paslēpa Staburagu?",
+  "Aglonas bazilika": "Kur atrodas Latvijas slavenākā svētvieta?",
+  "Turaidas pils": "Kur Siguldas pusē slēpjas sarkanā pils?",
+  "Zvārtes iezis": "Kur pie Amatas upes ir novērojams viens no skaistākajiem iežiem?",
+  "Āraišu ezerpils": "Kur ezera vidū reiz dzīvoja senie latgaļi?",
+  "Ķemeru Nacionālais parks": "Kurš parks ir atpazīstams ar sēravotiem?"
 },
  noFullScoreBufferLandmarks: [
     "Abavas senleja",
@@ -133,13 +129,14 @@ window.ARCGIGUESS_CONFIG = {
 
                 correctMessage:
                     "Ideāli! Tu nopelnīji <strong>+{roundScore} punktus</strong>.",
-                incorrectTitle:
-                    "Labs mēģinājums!",
-                   incorrectTitles: [
-                        "Labs mēģinājums!",
-                        "Gandrīz izdevās!",
-                        "Mēģini vēl precīzāk!",
-],
+                
+       distanceTitles: {
+ almost: "Gandrīz izdevās!",
+  close: "Labs mēģinājums, esi tuvu!",
+  medium: "Virziens ir labs, precizē atrašanās vietu!",
+  far: "Pamēģini paskatīties plašākā apkārtnē!",
+  veryFar: "Nākreiz sanāks!"
+},
 
                 incorrectMessage:
                     "Tu biji <strong>{distance} m</strong> prom no pareizās vietas. Tu nopelnīji <strong>{roundScore} punktus</strong>. Šeit ir pareizā lokācija.",
