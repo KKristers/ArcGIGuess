@@ -46,16 +46,10 @@ window.ARCGIGUESS_CONFIG = {
   "Ventas rumba": "Kur atrodas Eiropas platākais ūdenskritums?",
   "Staburags": "Kur Daugavas ūdeņi paslēpa Staburagu?",
   "Aglonas bazilika": "Kur atrodas Latvijas slavenākā svētvieta?",
-  "Turaidas pils": "Kur Siguldas pusē slēpjas sarkanā pils?",
+  "Moricsala": "Uz kuras salas slāpās Saksijas Morics?",
   "Zvārtes iezis": "Kur pie Amatas upes ir novērojams viens no skaistākajiem iežiem?",
   "Āraišu ezerpils": "Kur ezera vidū reiz dzīvoja senie latgaļi?",
-  "Ķemeru Nacionālais parks": "Kurš parks ir atpazīstams ar sēravotiem?"
 },
- noFullScoreBufferLandmarks: [
-    "Abavas senleja",
-    "Ķemeru Nacionālais parks",
-    "Ķemeru nacionālais parks",
-],
     /* -------------------------------------------------------------------------
      * 3. SCORING
      * ---------------------------------------------------------------------- */
@@ -132,10 +126,10 @@ window.ARCGIGUESS_CONFIG = {
                 
        distanceTitles: {
  almost: "Gandrīz izdevās!",
-  close: "Labs mēģinājums, esi tuvu!",
+  close: "Labs minējums, esi tuvu!",
   medium: "Virziens ir labs, precizē atrašanās vietu!",
-  far: "Pamēģini paskatīties plašākā apkārtnē!",
-  veryFar: "Nākreiz sanāks!"
+  far: "Diezgan tālu!",
+  veryFar: "Šoreiz nesanāca!"
 },
 
                 incorrectMessage:
