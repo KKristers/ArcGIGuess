@@ -43,12 +43,11 @@ window.ARCGIGUESS_CONFIG = {
     // Atļaut pabeigt spēli ātrāk
     allowFinishEarly: true,
    customLandmarkPrompts: {
-  "Ventas rumba": "Kur atrodas Eiropas platākais ūdenskritums?",
+  "Ventas rumba": "Norādiet vietu, kur atrodas Eiropas platākais ūdenskritums?",
   "Staburags": "Kur Daugavas ūdeņi paslēpa Staburagu?",
   "Aglonas bazilika": "Kur atrodas Latvijas slavenākā svētvieta?",
-  "Moricsala": "Uz kuras salas slāpās Saksijas Morics?",
-  "Zvārtes iezis": "Kur pie Amatas upes ir novērojams viens no skaistākajiem iežiem?",
-  "Āraišu ezerpils": "Kur ezera vidū reiz dzīvoja senie latgaļi?",
+  "Moricsala": "Uz kuras salas slēpās Saksijas Morics?",
+  "Āraišu ezerpils": "Kur ezera vidū ir atrodama ezerpils?",
 },
     /* -------------------------------------------------------------------------
      * 3. SCORING
