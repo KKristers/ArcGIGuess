@@ -2822,7 +2822,25 @@ function shouldUseFullScoreBuffer( landmark ) {
                             0,
                     };
 
-          const hasFullScoreBuffer = shouldUseFullScoreBuffer( targetLandmark );
+         const targetName =
+    normalizeLandmarkName(
+        targetLandmark &&
+            targetLandmark.name
+    );
+
+const isStruvesGeodeticArc =
+    targetName.includes(
+        "strūves ģeodēziskais loks"
+    ) ||
+    targetName.includes(
+        "struves geodeziskais loks"
+    );
+
+const hasFullScoreBuffer =
+    !isStruvesGeodeticArc &&
+    shouldUseFullScoreBuffer(
+        targetLandmark
+    );
 
                 const isInside =
                     isInsideGeometry(
