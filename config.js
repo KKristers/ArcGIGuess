@@ -130,7 +130,7 @@ window.ARCGIGUESS_CONFIG = {
 },
 
                 incorrectMessage:
-                    "Tu biji <strong>{distance} m</strong> attālumā no pareizās vietas. Tu nopelnīji <strong>{roundScore} punktus</strong>. Šī ir pareizā atrašanās vieta.",
+                    "Tu biji <strong>{distance} m</strong> attālumā no precīzās vietas. Tu nopelnīji <strong>{roundScore} punktus</strong>. Šī ir precīzā atrašanās vieta.",
 
                 nextButton:
                     "Nākamā vieta",
