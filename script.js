@@ -1555,32 +1555,7 @@ function getCustomLandmarkPrompt(
     return false;
 }
 
-                const scoring =
-                    CONFIG.scoring || {
-                        bucketMeters:
-                            500,
-                    };
-
-                const distance =
-                    getDistanceMeters(
-                        targetGeometry,
-                        guessPoint
-                    );
-
-                if (
-                    !Number.isFinite(
-                        distance
-                    )
-                ) {
-
-                    return false;
-                }
-
-                return (
-                    distance <=
-                    scoring.bucketMeters
-                );
-            }
+          
             /* =================================================================
              * RESULT SYMBOL
              * ================================================================= */
@@ -2815,10 +2790,11 @@ function shouldUseFullScoreBuffer( landmark ) {
                             0,
                     };
 
-         const targetName =
+     const targetName =
     normalizeLandmarkName(
-        targetLandmark &&
-            targetLandmark.name
+        getLandmarkName(
+            targetLandmark
+        )
     );
 
 const isStruvesGeodeticArc =
