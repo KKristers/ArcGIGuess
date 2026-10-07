@@ -42,11 +42,7 @@ window.ARCGIGUESS_CONFIG = {
     // Atļaut pabeigt spēli ātrāk
     allowFinishEarly: true,
    customLandmarkPrompts: {
-  "Ventas rumba": "Norādiet vietu, kur atrodas Eiropas platākais ūdenskritums?",
-  "Staburags": "Kur Daugavas ūdeņi paslēpa Staburagu?",
-  "Aglonas bazilika": "Kur atrodas Latvijas slavenākā svētvieta?",
-  "Moricsala": "Uz kuras salas slēpās Saksijas Morics?",
-  "Āraišu ezerpils": "Kur ezera vidū ir atrodama ezerpils?",
+  
 },
     /* -------------------------------------------------------------------------
      * 3. SCORING
@@ -88,10 +84,10 @@ window.ARCGIGUESS_CONFIG = {
                     "Laipni lūdzam “Vietas, kuras nedrīkstam aizmirst”!",
 
                 welcomeDesc:
-                    "Atrodi vietu. Atceries vēsturi. Pārbaudi sevi! Mēs parādīsim vēsturiskas vietas nosaukumu un attēlu. Vai vari to atrast kartē?<br><br>{scoringSummary}",
+                    "Atzīmē vietu. Atceries vēsturi. Pārbaudi sevi! Mēs parādīsim vietas nosaukumu un attēlu. Vai vari to atrast kartē?<br><br>{scoringSummary}",
 
                 scoringSummaryTemplate:
-    "<strong>Atrodi vietu un nopelni punktus!</strong><br>Atrodi norādītā objekta atrašanās vietu kartē.<br><strong>{points} punkti</strong> – ja vieta atrasta precīzi.<br>Par katriem {bucket} m no pareizās vietas tiek atņemts {penalty} punkts.",
+    "<strong>Atrodi vietu un nopelni punktus!</strong><br>Atrodi norādītā objekta atrašanās vietu kartē.<br><strong>{points} punkti</strong> – ja vieta atrasta precīzi.<br>Par katriem {bucket} m no precīzās objekta atrašanās vietas tiek atņemts {penalty} punkts.",
                 startButton:
                     "Sākt spēli",
 
@@ -120,18 +116,18 @@ window.ARCGIGUESS_CONFIG = {
                     "Pareizi!",
 
                 correctMessage:
-                    "Ideāli! Tu nopelnīji <strong>+{roundScore} punktus</strong>.",
+                    "Lieliski! Tu nopelnīji <strong>+{roundScore} punktus</strong>.",
                 
        distanceTitles: {
  almost: "Gandrīz izdevās!",
   close: "Labs minējums, esi tuvu!",
   medium: "Virziens ir labs, precizē atrašanās vietu!",
-  far: "Diezgan tālu!",
+  far: "😔",
   veryFar: "Šoreiz nesanāca!"
 },
 
                 incorrectMessage:
-                    "Tu biji <strong>{distance} m</strong> prom no pareizās vietas. Tu nopelnīji <strong>{roundScore} punktus</strong>. Šeit ir pareizā lokācija.",
+                    "Tu biji <strong>{distance} m</strong> attālumā no pareizās vietas. Tu nopelnīji <strong>{roundScore} punktus</strong>. Šī ir pareizā atrašanās vieta.",
 
                 nextButton:
                     "Nākamā vieta",
