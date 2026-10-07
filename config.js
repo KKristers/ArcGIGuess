@@ -84,7 +84,7 @@ window.ARCGIGUESS_CONFIG = {
                 /* START SCREEN */
 
                 welcomeTitle:
-                    "Laipni lūdzam “Vietas, kuras nedrīkstam aizmirst”!",
+                    "Laipni lūdzam spēlē “Vietas, kuras nedrīkstam aizmirst”!",
 
                 welcomeDesc:
                     "Atzīmē vietu. Atceries vēsturi. Pārbaudi sevi! Mēs parādīsim vietas nosaukumu un attēlu. Vai vari to atrast kartē?<br><br>{scoringSummary}",
