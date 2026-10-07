@@ -8,6 +8,7 @@ window.ARCGIGUESS_CONFIG = {
      * 1. BRANDING
      * ---------------------------------------------------------------------- */
 
+    
     appName: "Vietas, kuras nedrīkstam aizmirst!",
 
     tagline: "Pārbaudi savas zināšanas",
