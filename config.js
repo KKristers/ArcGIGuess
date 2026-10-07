@@ -126,7 +126,7 @@ window.ARCGIGUESS_CONFIG = {
   close: "Labs minējums, esi tuvu!",
   medium: "Virziens ir labs, precizē atrašanās vietu!",
   far: "😔",
-  veryFar: "Šoreiz nesanāca!"
+  veryFar: "😔"
 },
 
                 incorrectMessage:
