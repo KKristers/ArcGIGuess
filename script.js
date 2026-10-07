@@ -1506,61 +1506,54 @@ function getCustomLandmarkPrompt(
                 return Number.POSITIVE_INFINITY;
             }
 
-                                function isDirectHit(
+                             function isDirectHit(
+    targetGeometry,
+    guessPoint
+) {
+
+    if (
+        !targetGeometry ||
+        !guessPoint
+    ) {
+
+        return false;
+    }
+
+    try {
+
+        if (
+            targetGeometry.type ===
+                "polygon" &&
+            geometryEngine.contains(
                 targetGeometry,
                 guessPoint
-            ) {
+            )
+        ) {
 
-                if (
-                    !targetGeometry ||
-                    !guessPoint
-                ) {
+            return true;
+        }
 
-                    return false;
-                }
+        if (
+            targetGeometry.type ===
+                "extent" &&
+            targetGeometry.contains(
+                guessPoint
+            )
+        ) {
 
-                try {
+            return true;
+        }
 
-                    /*
-                     * Ja klikšķis ir polygon iekšā,
-                     * tas ir tiešs trāpījums.
-                     */
+    } catch (error) {
 
-                    if (
-                        targetGeometry.type ===
-                            "polygon" &&
-                        geometryEngine.contains(
-                            targetGeometry,
-                            guessPoint
-                        )
-                    ) {
+        console.warn(
+            "Hit test failed:",
+            error
+        );
+    }
 
-                        return true;
-                    }
-
-                    /*
-                     * Ja klikšķis ir extent iekšā,
-                     * tas ir tiešs trāpījums.
-                     */
-
-                    if (
-                        targetGeometry.type ===
-                            "extent" &&
-                        targetGeometry.contains(
-                            guessPoint
-                        )
-                    ) {
-
-                        return true;
-                    }
-
-                } catch (error) {
-
-                    console.warn(
-                        "Hit test failed:",
-                        error
-                    );
-                }
+    return false;
+}
 
                 const scoring =
                     CONFIG.scoring || {
