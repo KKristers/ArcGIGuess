@@ -61,6 +61,9 @@ window.ARCGIGUESS_CONFIG = {
         // Minimālais punktu skaits par kārtu
         minScore: 0,
     },
+    noFullScoreBufferLandmarks: [
+    "Strūves ģeodēziskais loks"
+],
 
     /* -------------------------------------------------------------------------
      * 4. LANGUAGES
