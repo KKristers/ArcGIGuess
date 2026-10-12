@@ -210,6 +210,24 @@ async function setOpenStreetMap() {
         return;
     }
 
+    const fallbackBasemap =
+        Basemap.fromId(
+            "osm"
+        );
+
+    if (fallbackBasemap) {
+
+        mapEl.map.basemap =
+            fallbackBasemap;
+
+        currentBasemapType =
+            "osm";
+
+        console.log(
+            "BASEMAP -> Fallback OpenStreetMap first"
+        );
+    }
+
     try {
 
         const vectorTileLayer =
@@ -219,9 +237,7 @@ async function setOpenStreetMap() {
                 }
             });
 
-        await vectorTileLayer.load();
-
-        const basemap =
+        const customBasemap =
             new Basemap({
                 baseLayers: [
                     vectorTileLayer
@@ -231,7 +247,7 @@ async function setOpenStreetMap() {
             });
 
         mapEl.map.basemap =
-            basemap;
+            customBasemap;
 
         currentBasemapType =
             "osm";
@@ -247,11 +263,6 @@ async function setOpenStreetMap() {
             error
         );
 
-        const fallbackBasemap =
-            Basemap.fromId(
-                "osm"
-            );
-
         if (fallbackBasemap) {
 
             mapEl.map.basemap =
@@ -261,7 +272,7 @@ async function setOpenStreetMap() {
                 "osm";
 
             console.log(
-                "BASEMAP -> Fallback OpenStreetMap"
+                "BASEMAP -> Fallback OpenStreetMap after error"
             );
         }
     }
