@@ -190,6 +190,16 @@ const CUSTOM_VECTOR_BASEMAP_ITEM_ID = "190e6f6949e44b5295685b48e6fe0a84";
 
             let basemapSwitchingReady =
                 false;
+         /* =================================================================
+ * SPECIAL SCORING
+ * ================================================================= */
+
+const BUFFERED_SCORING_LANDMARKS =
+    [
+        "Staburags",
+        "Ventas rumba",
+        "Aglonas bazilika"
+    ];
 
             /* =================================================================
              * BASEMAP HELPERS
@@ -475,6 +485,63 @@ setOpenStreetMap().catch(console.error);
 
                 waitForZoom();
             }
+         /* =================================================================
+          * SPECIAL SCORING HELPERS
+          * ================================================================= */
+
+        function isBufferedScoringLandmark( landmark ) {
+
+            if (
+                !landmark ||
+                !landmark.attributes
+            ) {
+                return false;
+            }
+
+            const activeLang =
+                currentLang();
+
+            const nameField =
+                activeLang.landmarkNameField ||
+                "Name";
+
+            const name =
+                String(
+                    landmark.attributes[nameField] ||
+                    ""
+                ).trim();
+
+            return BUFFERED_SCORING_LANDMARKS.includes(
+                name
+            );
+        }
+
+        function calculateBufferedPolygonScore( distanceMeters ) {
+
+            if (
+                typeof distanceMeters !== "number" ||
+                !Number.isFinite(distanceMeters)
+            ) {
+                return 0;
+            }
+
+            if ( distanceMeters <= 1000 ) {
+                return 10;
+            }
+
+            const extraKilometers =
+                Math.ceil(
+                    ( distanceMeters - 1000 ) / 1000
+                );
+
+            const score =
+                10 - extraKilometers;
+
+            return Math.max(
+                0,
+                score
+            );
+        }
 
             /* =================================================================
              * PIN / SYMBOLS
@@ -2893,56 +2960,98 @@ const hasFullScoreBuffer =
                  *    1-500 m = 9 punkti.
                  */
 
-                if (
-                    isInside
-                ) {
+                if ( isInside ) {
 
-                    roundScore =
-                        scoring.pointsForHit;
+    roundScore =
+        scoring.pointsForHit;
 
-                } else if (
-                    !Number.isFinite(
-                        distanceInMeters
-                    )
-                ) {
+} else if (
+    !Number.isFinite(
+        distanceInMeters
+    )
+) {
 
-                    roundScore =
-                        scoring.minScore;
+    roundScore =
+        scoring.minScore;
 
-                } else if (
-                    hasFullScoreBuffer
-                ) {
+} else if (
+    isBufferedScoringLandmark(
+        targetLandmark
+    )
+) {
 
-                    /*
-                     * Mazie objekti:
-                     * 0-500 m ārpus poligona = 10 punkti
-                     * 501-1000 m = 9 punkti
-                     * 1001-1500 m = 8 punkti
-                     */
+    /*
+        Īpašā loģika:
+        Staburags, Ventas rumba, Aglonas bazilika
 
-                    const bandsBeyondBuffer =
-                        Math.max(
-                            0,
-                            Math.ceil(
-                                (
-                                    distanceInMeters -
-                                    scoring.bucketMeters
-                                ) /
-                                    scoring.bucketMeters
-                            )
-                        );
+        0-1000 m no poligona = 10 punkti
+        1001-2000 m = 9 punkti
+        2001-3000 m = 8 punkti
+        utt.
+    */
+    roundScore =
+        calculateBufferedPolygonScore(
+            distanceInMeters
+        );
 
-                    const penalty =
-                        bandsBeyondBuffer *
-                        scoring.penaltyPerBucket;
+} else if (
+    hasFullScoreBuffer
+) {
 
-                    roundScore =
-                        Math.max(
-                            scoring.minScore,
-                            scoring.pointsForHit -
-                                penalty
-                        );
+    /*
+        Esošā loģika pārējiem mazajiem objektiem:
+        0-500 m ārpus poligona = 10 punkti
+        501-1000 m = 9 punkti
+        1001-1500 m = 8 punkti
+    */
+    const bandsBeyondBuffer =
+        Math.max(
+            0,
+            Math.ceil(
+                (
+                    distanceInMeters -
+                    scoring.bucketMeters
+                ) /
+                scoring.bucketMeters
+            )
+        );
 
+    const penalty =
+        bandsBeyondBuffer *
+        scoring.penaltyPerBucket;
+
+    roundScore =
+        Math.max(
+            scoring.minScore,
+            scoring.pointsForHit -
+            penalty
+        );
+
+} else {
+
+    /*
+        Esošā loģika lielajiem objektiem:
+        poligonā = 10 punkti
+        1-500 m ārpus poligona = 9 punkti
+        501-1000 m = 8 punkti
+    */
+    const bands =
+        Math.ceil(
+            distanceInMeters /
+            scoring.bucketMeters
+        );
+
+    const penalty =
+        bands *
+        scoring.penaltyPerBucket;
+
+    roundScore =
+        Math.max(
+            scoring.minScore,
+            scoring.pointsForHit -
+            penalty
+        );
+}
                 } else {
 
                     /*
