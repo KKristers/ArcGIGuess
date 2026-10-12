@@ -321,48 +321,57 @@ async function setOpenStreetMap() {
                 }
             }
 
-            function updateBasemapForZoom(
-                zoom
-            ) {
+          function updateBasemapForZoom( zoom ) {
 
-                if (
-                    !mapEl ||
-                    !mapEl.map
-                ) {
-                    return;
-                }
-
-                if (
-                    typeof zoom !== "number" ||
-                    !Number.isFinite(zoom) ||
-                    zoom < 0
-                ) {
-                    return;
-                }
-
-console.log(
-    "Checking basemap for zoom:",
-    zoom,
-    "rounded:",
-    Math.round(zoom * 100) / 100,
-    "scale:",
-    mapEl.view ? Math.round(mapEl.view.scale) : null
-);
-
-               if ( zoom < IMAGERY_ZOOM ) {
-    if ( currentBasemapType !== "osm" ) {
-        setOpenStreetMap().catch(console.error);
+    if (
+        !mapEl ||
+        !mapEl.map ||
+        !mapEl.view
+    ) {
+        return;
     }
-    return;
-}
 
-                if (
-                    currentBasemapType !==
-                    "imagery"
-                ) {
-                    setWorldImagery();
-                }
-            }
+    const scale =
+        mapEl.view.scale;
+
+    if (
+        typeof scale !== "number" ||
+        !Number.isFinite(scale)
+    ) {
+        return;
+    }
+
+    console.log(
+        "SCALE TEST:",
+        "zoom =", zoom,
+        "scale =", Math.round(scale),
+        "currentBasemapType =", currentBasemapType
+    );
+
+    /*
+        Jo mazāks scale skaitlis, jo tuvāk karte.
+        Piemēram:
+        1:36000 = tālāk
+        1:18000 = tuvāk
+        1:9000 = vēl tuvāk
+    */
+
+    const IMAGERY_SCALE =
+        18000;
+
+    if ( scale > IMAGERY_SCALE ) {
+
+        if ( currentBasemapType !== "osm" ) {
+            setOpenStreetMap().catch(console.error);
+        }
+
+        return;
+    }
+
+    if ( currentBasemapType !== "imagery" ) {
+        setWorldImagery();
+    }
+}
 
             function setupBasemapSwitching() {
 
