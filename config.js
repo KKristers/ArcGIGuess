@@ -90,9 +90,8 @@ window.ARCGIGUESS_CONFIG = {
                 welcomeDesc:
                     "Pārbaudi sevi! Mēs parādīsim kādas zīmīgas vietas nosaukumu un attēlu – vai Tu vari to atrast Latvijas kartē?<br><br>{scoringSummary}",
 
-                scoringSummaryTemplate:
-    "<strong>Atzīmē savu minējumu un nopelni punktus!<br>Precīzs minējums dos<strong>{points} punktus.<br>Par katriem {bucket} m prom no precīzās atrašanās vietas tiks atņemts {penalty} punkts.",
-                startButton:
+               scoringSummaryTemplate:
+    "<strong>Atzīmē savu minējumu un nopelni punktus!</strong><br>Precīzs minējums dos <strong>{points} punktus</strong>.<br>Par katriem {bucket} m prom no precīzās atrašanās vietas tiks atņemts {penalty} punkts.",
                     "Sākt spēli",
 
                 /* LOADING */
