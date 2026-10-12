@@ -2960,7 +2960,7 @@ const hasFullScoreBuffer =
                  *    1-500 m = 9 punkti.
                  */
 
-                if ( isInside ) {
+               if ( isInside ) {
 
     roundScore =
         scoring.pointsForHit;
@@ -2979,6 +2979,17 @@ const hasFullScoreBuffer =
         targetLandmark
     )
 ) {
+
+    console.log(
+        "SPECIAL SCORING:",
+        getLandmarkName(
+            targetLandmark
+        ),
+        "distance =",
+        Math.round(
+            distanceInMeters
+        )
+    );
 
     /*
         Īpašā loģika:
@@ -3028,6 +3039,31 @@ const hasFullScoreBuffer =
         );
 
 } else {
+
+    /*
+        Esošā loģika lielajiem objektiem:
+        poligonā = 10 punkti
+        1-500 m ārpus poligona = 9 punkti
+        501-1000 m = 8 punkti
+    */
+    const bands =
+        Math.ceil(
+            distanceInMeters /
+            scoring.bucketMeters
+        );
+
+    const penalty =
+        bands *
+        scoring.penaltyPerBucket;
+
+    roundScore =
+        Math.max(
+            scoring.minScore,
+            scoring.pointsForHit -
+            penalty
+        );
+}
+                else {
 
     /*
         Esošā loģika lielajiem objektiem:
