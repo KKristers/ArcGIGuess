@@ -92,7 +92,9 @@ window.ARCGIGUESS_CONFIG = {
 
                scoringSummaryTemplate:
     "<strong>Atzīmē savu minējumu un nopelni punktus!</strong><br>Precīzs minējums dos <strong>{points} punktus</strong>.<br>Par katriem {bucket} m prom no precīzās atrašanās vietas tiks atņemts {penalty} punkts.",
-                    "Sākt spēli",
+
+startButton:
+    "Sākt spēli",
 
                 /* LOADING */
 
