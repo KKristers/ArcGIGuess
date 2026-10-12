@@ -326,13 +326,16 @@ async function setOpenStreetMap() {
                 }
             }
 
-          function updateBasemapForZoom( zoom ) {
+function updateBasemapForZoom( zoom ) {
 
     if (
         !mapEl ||
         !mapEl.map ||
         !mapEl.view
     ) {
+        console.log(
+            "BASEMAP DEBUG: missing map/view"
+        );
         return;
     }
 
@@ -343,28 +346,32 @@ async function setOpenStreetMap() {
         typeof scale !== "number" ||
         !Number.isFinite(scale)
     ) {
+        console.log(
+            "BASEMAP DEBUG: invalid scale",
+            scale
+        );
         return;
     }
+
+    const IMAGERY_SCALE =
+        45000;
 
     console.log(
         "SCALE TEST:",
         "zoom =", zoom,
         "scale =", Math.round(scale),
+        "threshold =", IMAGERY_SCALE,
         "currentBasemapType =", currentBasemapType
     );
 
-    /*
-        Jo mazāks scale skaitlis, jo tuvāk karte.
-        Piemēram:
-        1:36000 = tālāk
-        1:18000 = tuvāk
-        1:9000 = vēl tuvāk
-    */
-
-    const IMAGERY_SCALE =
-        45000;
-
     if ( scale > IMAGERY_SCALE ) {
+
+        console.log(
+            "BASEMAP BRANCH -> CUSTOM",
+            Math.round(scale),
+            ">",
+            IMAGERY_SCALE
+        );
 
         if ( currentBasemapType !== "osm" ) {
             setOpenStreetMap().catch(console.error);
@@ -372,6 +379,13 @@ async function setOpenStreetMap() {
 
         return;
     }
+
+    console.log(
+        "BASEMAP BRANCH -> IMAGERY",
+        Math.round(scale),
+        "<=",
+        IMAGERY_SCALE
+    );
 
     if ( currentBasemapType !== "imagery" ) {
         setWorldImagery();
