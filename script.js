@@ -340,10 +340,14 @@ async function setOpenStreetMap() {
                     return;
                 }
 
-                console.log(
-                    "Checking basemap for zoom:",
-                    zoom
-                );
+console.log(
+    "Checking basemap for zoom:",
+    zoom,
+    "rounded:",
+    Math.round(zoom * 100) / 100,
+    "scale:",
+    mapEl.view ? Math.round(mapEl.view.scale) : null
+);
 
                if ( zoom < IMAGERY_ZOOM ) {
     if ( currentBasemapType !== "osm" ) {
