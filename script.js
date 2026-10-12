@@ -178,7 +178,7 @@ $arcgis
              * ================================================================= */
 
             const IMAGERY_ZOOM =
-                16;
+                15;
 const CUSTOM_VECTOR_BASEMAP_ITEM_ID = "190e6f6949e44b5295685b48e6fe0a84";
             let currentBasemapType =
                 null;
