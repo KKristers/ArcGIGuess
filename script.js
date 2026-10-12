@@ -345,20 +345,12 @@ async function setOpenStreetMap() {
                     zoom
                 );
 
-                if (
-                    zoom <
-                    IMAGERY_ZOOM
-                ) {
-
-                    if (
-                        currentBasemapType !==
-                        "osm"
-                    ) {
-                        setOpenStreetMap();
-                    }
-
-                    return;
-                }
+               if ( zoom < IMAGERY_ZOOM ) {
+    if ( currentBasemapType !== "osm" ) {
+        setOpenStreetMap().catch(console.error);
+    }
+    return;
+}
 
                 if (
                     currentBasemapType !==
