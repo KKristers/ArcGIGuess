@@ -362,7 +362,7 @@ async function setOpenStreetMap() {
     */
 
     const IMAGERY_SCALE =
-        30000;
+        45000;
 
     if ( scale > IMAGERY_SCALE ) {
 
