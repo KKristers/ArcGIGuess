@@ -177,7 +177,7 @@ $arcgis
 
             const IMAGERY_ZOOM =
                 16;
-
+const CUSTOM_VECTOR_BASEMAP_ITEM_ID = "190e6f6949e44b5295685b48e6fe0a84";
             let currentBasemapType =
                 null;
 
@@ -199,50 +199,42 @@ $arcgis
                 );
             }
 
-            function setOpenStreetMap() {
+function setOpenStreetMap() {
 
-                if (
-                    !mapEl ||
-                    !mapEl.map
-                ) {
-                    return;
+    if (
+        !mapEl ||
+        !mapEl.map
+    ) {
+        return;
+    }
+
+    try {
+
+        const basemap =
+            new Basemap({
+                portalItem: {
+                    id: "190e6f6949e44b5295685b48e6fe0a84"
                 }
+            });
 
-                try {
+        mapEl.map.basemap =
+            basemap;
 
-                    const basemap =
-                        Basemap.fromId(
-                            "osm"
-                        );
+        currentBasemapType =
+            "osm";
 
-                    if (!basemap) {
+        console.log(
+            "BASEMAP -> Custom Vector Style"
+        );
 
-                        console.error(
-                            "ArcGIS Online OSM basemap could not be created."
-                        );
+    } catch (error) {
 
-                        return;
-                    }
-
-                    mapEl.map.basemap =
-                        basemap;
-
-                    currentBasemapType =
-                        "osm";
-
-                    console.log(
-                        "BASEMAP -> OpenStreetMap"
-                    );
-
-                } catch (error) {
-
-                    console.error(
-                        "OSM basemap error:",
-                        error
-                    );
-                }
-            }
-
+        console.error(
+            "Custom vector basemap error:",
+            error
+        );
+    }
+}
             function setWorldImagery() {
 
                 if (
