@@ -9,7 +9,7 @@ window.ARCGIGUESS_CONFIG = {
      * ---------------------------------------------------------------------- */
 
     
-    appName: "Vietas, kuras nedrīkstam aizmirst!",
+    appName: "Vietas, ko atcerēties!",
 
     tagline: "Pārbaudi savas zināšanas",
 
@@ -85,13 +85,13 @@ window.ARCGIGUESS_CONFIG = {
                 /* START SCREEN */
 
                 welcomeTitle:
-                    "Laipni lūdzam spēlē “Vietas, kuras nedrīkstam aizmirst”!",
+                    "Laipni lūdzam spēlē <br>"Vietas, ko atcerēties!"",
 
                 welcomeDesc:
-                    "Atzīmē vietu. Atceries vēsturi. Pārbaudi sevi! Mēs parādīsim vietas nosaukumu un attēlu. Vai vari to atrast kartē?<br><br>{scoringSummary}",
+                    "Pārbaudi sevi! Mēs parādīsim kādas zīmīgas vietas nosaukumu un attēlu – vai Tu vari to atrast Latvijas kartē?<br><br>{scoringSummary}",
 
                 scoringSummaryTemplate:
-    "<strong>Atrodi vietu un nopelni punktus!</strong><br>Atrodi norādītā objekta atrašanās vietu kartē.<br><strong>{points} punkti</strong> – ja vieta atrasta precīzi.<br>Par katriem {bucket} m no precīzās objekta atrašanās vietas tiek atņemts {penalty} punkts.",
+    "<strong>Atzīmē savu minējumu un nopelni punktus!<br>Precīzs minējums dos<strong>{points} punktus.<br>Par katriem {bucket} m prom no precīzās atrašanās vietas tiks atņemts {penalty} punkts.",
                 startButton:
                     "Sākt spēli",
 
