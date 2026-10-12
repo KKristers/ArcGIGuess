@@ -123,8 +123,8 @@ startButton:
                 correctMessage:
                     "Lieliski! Tu nopelnīji <strong>+{roundScore} punktus</strong>.",
                 
-       distanceTitles: {
- almost: "Gandrīz izdevās!",
+   distanceTitles: {
+  veryClose: "Gandrīz izdevās!",
   close: "Labs minējums, esi tuvu!",
   medium: "Virziens ir labs, precizē atrašanās vietu!",
   far: "😔",
