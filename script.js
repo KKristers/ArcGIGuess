@@ -13,6 +13,7 @@ $arcgis
         "@arcgis/core/geometry/operators/distanceOperator.js",
         "@arcgis/core/geometry/geometryEngine.js",
         "@arcgis/core/Basemap.js",
+        "@arcgis/core/layers/VectorTileLayer.js",
     ])
     .then(
         ([
@@ -23,6 +24,7 @@ $arcgis
             distanceOperator,
             geometryEngine,
             Basemap,
+            VectorTileLayer,
         ]) => {
 
             /* =================================================================
@@ -199,7 +201,7 @@ const CUSTOM_VECTOR_BASEMAP_ITEM_ID = "190e6f6949e44b5295685b48e6fe0a84";
                 );
             }
 
-function setOpenStreetMap() {
+async function setOpenStreetMap() {
 
     if (
         !mapEl ||
@@ -210,11 +212,22 @@ function setOpenStreetMap() {
 
     try {
 
-        const basemap =
-            new Basemap({
+        const vectorTileLayer =
+            new VectorTileLayer({
                 portalItem: {
                     id: CUSTOM_VECTOR_BASEMAP_ITEM_ID
                 }
+            });
+
+        await vectorTileLayer.load();
+
+        const basemap =
+            new Basemap({
+                baseLayers: [
+                    vectorTileLayer
+                ],
+                title: "Custom Vector Style",
+                id: "custom-vector-style"
             });
 
         mapEl.map.basemap =
@@ -240,6 +253,7 @@ function setOpenStreetMap() {
             );
 
         if (fallbackBasemap) {
+
             mapEl.map.basemap =
                 fallbackBasemap;
 
@@ -367,8 +381,7 @@ function setOpenStreetMap() {
                     "Setting up basemap switching..."
                 );
 
-                setOpenStreetMap();
-
+setOpenStreetMap().catch(console.error);
                 const waitForZoom =
                     () => {
 
