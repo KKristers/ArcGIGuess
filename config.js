@@ -231,7 +231,7 @@ window.ARCGIGUESS_CONFIG = {
 
     social: {
         title:
-            "Vietas, kuras nedrīkstam aizmirst!: Atrodi vietu kartē",
+            "Vietas, ko atcerēties!: Atrodi vietu kartē",
 
         description:
             "Atrodi vietu. Atceries vēsturi. Pārbaudi sevi! Mēs parādīsim vēsturiskas vietas nosaukumu un attēlu.",
@@ -256,21 +256,9 @@ window.ARCGIGUESS_CONFIG = {
     survey123Url:
         "https://survey123.arcgis.com/share/ca86560c30ff4566a52adfd45b829fd0?portalUrl=https://envirotech.maps.arcgis.com",
 
-    /*
-     * Survey123 jautājuma/lauka īstais nosaukums rezultātam.
-     * Spēles kods ģenerēs:
-     * field:rezult_ts=123
-     */
     submitScoreFieldId:
         "rezult_ts",
 
-    /*
-     * Šim jābūt tās pašas Survey123 rezultātu tabulas /query URL,
-     * kurā tiek iesniegti dati.
-     *
-     * Ja rezultātu tabula pēc iesniegšanas nerāda jaunos ierakstus,
-     * šis URL, visticamāk, norāda uz nepareizu slāni.
-     */
     dataApiUrl:
         "https://services1.arcgis.com/zu8dBGfmKCvrZHh2/arcgis/rest/services/survey123_c4317eb262934df4b2fe38cb42a3d1d1_results/FeatureServer/0/query",
 
