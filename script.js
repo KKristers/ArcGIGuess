@@ -333,44 +333,34 @@ function updateBasemapForZoom( zoom ) {
         !mapEl.map ||
         !mapEl.view
     ) {
-        console.log(
-            "BASEMAP DEBUG: missing map/view"
-        );
         return;
     }
-
-    const scale =
-        mapEl.view.scale;
 
     if (
-        typeof scale !== "number" ||
-        !Number.isFinite(scale)
+        typeof zoom !== "number" ||
+        !Number.isFinite(zoom) ||
+        zoom < 0
     ) {
-        console.log(
-            "BASEMAP DEBUG: invalid scale",
-            scale
-        );
         return;
     }
 
-    const IMAGERY_SCALE =
-        45000;
+    const IMAGERY_ZOOM =
+        16;
 
     console.log(
-        "SCALE TEST:",
-        "zoom =", zoom,
-        "scale =", Math.round(scale),
-        "threshold =", IMAGERY_SCALE,
-        "currentBasemapType =", currentBasemapType
+        "ZOOM SWITCH:",
+        "zoom =",
+        zoom,
+        "threshold =",
+        IMAGERY_ZOOM,
+        "currentBasemapType =",
+        currentBasemapType
     );
 
-    if ( scale > IMAGERY_SCALE ) {
+    if ( zoom < IMAGERY_ZOOM ) {
 
         console.log(
-            "BASEMAP BRANCH -> CUSTOM",
-            Math.round(scale),
-            ">",
-            IMAGERY_SCALE
+            "BASEMAP BRANCH -> CUSTOM"
         );
 
         if ( currentBasemapType !== "osm" ) {
@@ -381,17 +371,13 @@ function updateBasemapForZoom( zoom ) {
     }
 
     console.log(
-        "BASEMAP BRANCH -> IMAGERY",
-        Math.round(scale),
-        "<=",
-        IMAGERY_SCALE
+        "BASEMAP BRANCH -> IMAGERY"
     );
 
     if ( currentBasemapType !== "imagery" ) {
         setWorldImagery();
     }
 }
-
             function setupBasemapSwitching() {
 
                 if (!mapEl) {
