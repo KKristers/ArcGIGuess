@@ -213,7 +213,7 @@ function setOpenStreetMap() {
         const basemap =
             new Basemap({
                 portalItem: {
-                    id: "190e6f6949e44b5295685b48e6fe0a84"
+                    id: CUSTOM_VECTOR_BASEMAP_ITEM_ID
                 }
             });
 
@@ -233,6 +233,23 @@ function setOpenStreetMap() {
             "Custom vector basemap error:",
             error
         );
+
+        const fallbackBasemap =
+            Basemap.fromId(
+                "osm"
+            );
+
+        if (fallbackBasemap) {
+            mapEl.map.basemap =
+                fallbackBasemap;
+
+            currentBasemapType =
+                "osm";
+
+            console.log(
+                "BASEMAP -> Fallback OpenStreetMap"
+            );
+        }
     }
 }
             function setWorldImagery() {
