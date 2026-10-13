@@ -55,6 +55,72 @@ window.ARCGIGUESS_CONFIG = {
         // Minimālais punktu skaits par kārtu
         minScore: 0,
     },
+    customScoringRules: {
+    "Rīgas Brāļu kapi": {
+        fullScoreBufferMeters: 2500,
+        penaltyStepMeters: 500,
+    },
+
+    "Vendene": {
+        fullScoreBufferMeters: 1000,
+        penaltyStepMeters: 1000,
+    },
+
+    "Lībava": {
+        fullScoreBufferMeters: 1000,
+        penaltyStepMeters: 1000,
+    },
+
+    "Jaunākā UNESCO Pasaules mantojuma vieta Latvijā": {
+        fullScoreBufferMeters: 1000,
+        penaltyStepMeters: 1000,
+    },
+
+    "Moricsala": {
+        fullScoreBufferMeters: 5000,
+        penaltyStepMeters: 500,
+    },
+
+    "Rundāles pils": {
+        fullScoreBufferMeters: 5000,
+        penaltyStepMeters: 500,
+    },
+
+    "Aglonas bazilika": {
+        fullScoreBufferMeters: 5000,
+        penaltyStepMeters: 500,
+    },
+
+    "Āraišu ezerpils": {
+        fullScoreBufferMeters: 5000,
+        penaltyStepMeters: 500,
+    },
+
+    "Staburags": {
+        fullScoreBufferMeters: 5000,
+        penaltyStepMeters: 500,
+    },
+
+    "Strūves ģeodēziskais loks": {
+        fullScoreBufferMeters: 5000,
+        penaltyStepMeters: 500,
+    },
+
+    "Austras koks": {
+        fullScoreBufferMeters: 5000,
+        penaltyStepMeters: 500,
+    },
+
+    "Ziemassvētku kauju muzejs": {
+        fullScoreBufferMeters: 5000,
+        penaltyStepMeters: 500,
+    },
+
+    "Daugavas loki": {
+        fullScoreBufferMeters: 1000,
+        penaltyStepMeters: 1000,
+    },
+},
     noFullScoreBufferLandmarks: [
     "Strūves ģeodēziskais loks"
 ],
