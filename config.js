@@ -103,7 +103,7 @@ startButton:
                     "Punkti: {score}",
 
                 roundDisplay:
-                    "Kārta {current} no {total}",
+                    "Jautājums: {current} / {total}",
 
                 confirmButton:
                     "Apstiprināt minējumu",
