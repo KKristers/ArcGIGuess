@@ -204,7 +204,7 @@ startButton:
                     "Nospied vēlreiz, lai noslēgtu spēli",
 
                 gameOverButton:
-                    "Rezultāti",
+                    "Vai Latviju pazīstu labi?",
 
                 /* GAME OVER */
 
