@@ -2982,26 +2982,47 @@ const hasFullScoreBuffer =
                         Number.POSITIVE_INFINITY;
                 }
 
-               let roundScore;
+              let roundScore;
 
-const customScoringRule = getCustomScoringRule( targetLandmark );
+const customScoringRule =
+    getCustomScoringRule(
+        targetLandmark
+    );
 
 if ( isInside ) {
-    roundScore = scoring.pointsForHit;
-} else if ( !Number.isFinite( distanceInMeters ) ) {
-    roundScore = scoring.minScore;
-} else if ( customScoringRule ) {
-    roundScore = calculateCustomScore(
-        distanceInMeters,
-        customScoringRule,
-        scoring
-    );
+
+    roundScore =
+        scoring.pointsForHit;
+
+} else if (
+    !Number.isFinite(
+        distanceInMeters
+    )
+) {
+
+    roundScore =
+        scoring.minScore;
+
+} else if (
+    customScoringRule
+) {
+
+    roundScore =
+        calculateCustomScore(
+            distanceInMeters,
+            customScoringRule,
+            scoring
+        );
 
     console.log(
         "CUSTOM SCORING:",
-        getLandmarkName( targetLandmark ),
+        getLandmarkName(
+            targetLandmark
+        ),
         "distance =",
-        Math.round( distanceInMeters ),
+        Math.round(
+            distanceInMeters
+        ),
         "buffer =",
         customScoringRule.fullScoreBufferMeters,
         "step =",
@@ -3009,46 +3030,53 @@ if ( isInside ) {
         "score =",
         roundScore
     );
-} else {
-    const bandsBeyondBuffer = Math.max(
-        0,
-        Math.ceil(
-            ( distanceInMeters - scoring.bucketMeters ) /
-                scoring.bucketMeters
-        )
-    );
 
-    const penalty = bandsBeyondBuffer * scoring.penaltyPerBucket;
+} else if (
+    hasFullScoreBuffer
+) {
 
-    roundScore = Math.max(
-        scoring.minScore,
-        scoring.pointsForHit - penalty
-    );
-} else {
-
-            /*
-                Esošā loģika lielajiem objektiem:
-                poligonā = 10 punkti
-                1-500 m ārpus poligona = 9 punkti
-                501-1000 m = 8 punkti
-            */
-            const bands =
-                Math.ceil(
-                    distanceInMeters /
+    const bandsBeyondBuffer =
+        Math.max(
+            0,
+            Math.ceil(
+                (
+                    distanceInMeters -
                     scoring.bucketMeters
-                );
+                ) /
+                scoring.bucketMeters
+            )
+        );
 
-            const penalty =
-                bands *
-                scoring.penaltyPerBucket;
+    const penalty =
+        bandsBeyondBuffer *
+        scoring.penaltyPerBucket;
 
-            roundScore =
-                Math.max(
-                    scoring.minScore,
-                    scoring.pointsForHit -
-                    penalty
-                );
-        }
+    roundScore =
+        Math.max(
+            scoring.minScore,
+            scoring.pointsForHit -
+            penalty
+        );
+
+} else {
+
+    const bands =
+        Math.ceil(
+            distanceInMeters /
+            scoring.bucketMeters
+        );
+
+    const penalty =
+        bands *
+        scoring.penaltyPerBucket;
+
+    roundScore =
+        Math.max(
+            scoring.minScore,
+            scoring.pointsForHit -
+            penalty
+        );
+}
                const gotFullPoints =
     roundScore ===
     scoring.pointsForHit;
