@@ -151,7 +151,7 @@ window.ARCGIGUESS_CONFIG = {
 
 
                scoringSummaryTemplate:
-    "<strong>Atzīmē savu minējumu un nopelni punktus!</strong><br>Ja atradīsi vietu precīzi vai Tavs minējums atradīsies līdz 5 km attālumā no objekta – saņemsi <strong>{points} punktus!</strong>.<br>Par katriem {bucket} m tālāk - tiks atņemts {penalty} punkts.",
+    "<strong>Atzīmē savu minējumu un nopelni punktus!</strong><br>Ja atradīsi vietu precīzi vai Tavs minējums atradīsies līdz 5 km attālumā no objekta – saņemsi <strong>{points} punktus!</strong><br>Par katriem {bucket} m tālāk - tiks atņemts {penalty} punkts.",
 
 startButton:
     "Sākt spēli",
