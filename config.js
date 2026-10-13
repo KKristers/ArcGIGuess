@@ -76,7 +76,7 @@ window.ARCGIGUESS_CONFIG = {
         penaltyStepMeters: 1000,
     },
 
-    "Moricsala": {
+    "Vecākais dabas rezervāts Latvijā (Moricsala)": {
         fullScoreBufferMeters: 5000,
         penaltyStepMeters: 500,
     },
@@ -101,12 +101,12 @@ window.ARCGIGUESS_CONFIG = {
         penaltyStepMeters: 500,
     },
 
-    "Strūves ģeodēziskais loks": {
+    "Strūves ģeodēziskā loka UNESCO punkts “Sestu kalns”": {
         fullScoreBufferMeters: 5000,
         penaltyStepMeters: 500,
     },
 
-    "Austras koks": {
+    "Latvijas tālākais austrumu punkts “Austras koks”": {
         fullScoreBufferMeters: 5000,
         penaltyStepMeters: 500,
     },
