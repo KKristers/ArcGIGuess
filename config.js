@@ -68,12 +68,12 @@ window.ARCGIGUESS_CONFIG = {
 
     "Lībava": {
         fullScoreBufferMeters: 5000,
-        penaltyStepMeters: 1000,
+        penaltyStepMeters: 500,
     },
 
     "Jaunākā UNESCO Pasaules mantojuma vieta Latvijā": {
         fullScoreBufferMeters: 5000,
-        penaltyStepMeters: 1000,
+        penaltyStepMeters: 500,
     },
 
     "Vecākais dabas rezervāts Latvijā (Moricsala)": {
