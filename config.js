@@ -34,7 +34,7 @@ window.ARCGIGUESS_CONFIG = {
     shuffleLandmarks: true,
 
     // Atļaut pabeigt spēli ātrāk
-    allowFinishEarly: true,
+    allowFinishEarly: false,
    customLandmarkPrompts: {
   
 },
