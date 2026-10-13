@@ -178,7 +178,7 @@ $arcgis
              * ================================================================= */
 
             const IMAGERY_ZOOM =
-    13;
+    12;
 
 console.log(
     "SCRIPT TEST: IMAGERY_ZOOM =",
@@ -355,7 +355,7 @@ function updateBasemapForZoom( zoom ) {
     }
 
     const IMAGERY_ZOOM =
-        13;
+        12;
 
     console.log(
         "ZOOM SWITCH:",
