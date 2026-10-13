@@ -147,11 +147,11 @@ window.ARCGIGUESS_CONFIG = {
                     "Laipni lūdzam spēlē <br>“Vietas, ko atcerēties!”",
 
                 welcomeDesc:
-                    "Pārbaudi sevi! Mēs parādīsim kādas zīmīgas vietas nosaukumu un attēlu – vai Tu vari to atrast Latvijas kartē?<br><br>{scoringSummary}<br><br><strong>Aktīvākajām skolām ir iespēja iegūt balvu, savukārt citiem – lieliska iespēja iepazīt Latviju!</strong>",
+                    "Novembrī tiek atzīmēta ĢIS diena! Svinēsim to kopā! Pārbaudi sevi un atrodi nosauktās vietas Latvijas kartē!<br><br>{scoringSummary}<br><br><strong>Ja esi skolēns – pēc spēles pabeigšanas iesniedz rezultātus, aizpildot anketu. Aktīvākās klases saņems sveicienu no Envirotech.<br><br>Sveiciens valsts svētku un ĢIS dienas mēnesī!</strong>",
 
 
                scoringSummaryTemplate:
-    "<strong>Atzīmē savu minējumu un nopelni punktus!</strong><br>Precīzs minējums dos <strong>{points} punktus</strong>.<br>Par katriem {bucket} m prom no precīzās atrašanās vietas tiks atņemts {penalty} punkts.",
+    "<strong>Atzīmē savu minējumu un nopelni punktus!</strong><br>Ja atradīsi vietu precīzi vai Tavs minējums atradīsies līdz 5 km attālumā no objekta – saņemsi <strong>{points} punktus!</strong>.<br>Par katriem {bucket} m tālāk - tiks atņemts {penalty} punkts.",
 
 startButton:
     "Sākt spēli",
