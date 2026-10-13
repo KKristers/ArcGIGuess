@@ -2988,7 +2988,14 @@ const customScoringRule =
     getCustomScoringRule(
         targetLandmark
     );
-
+console.log(
+    "SCORING NAME CHECK:",
+    getLandmarkName(targetLandmark),
+    "normalized:",
+    normalizeLandmarkName(getLandmarkName(targetLandmark)),
+    "rule:",
+    customScoringRule
+);
 if ( isInside ) {
 
     roundScore =
