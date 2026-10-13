@@ -57,22 +57,22 @@ window.ARCGIGUESS_CONFIG = {
     },
     customScoringRules: {
     "Rīgas Brāļu kapi": {
-        fullScoreBufferMeters: 2500,
+        fullScoreBufferMeters: 5000,
         penaltyStepMeters: 500,
     },
 
     "Vendene": {
-        fullScoreBufferMeters: 1000,
-        penaltyStepMeters: 1000,
+        fullScoreBufferMeters: 5000,
+        penaltyStepMeters: 500,
     },
 
     "Lībava": {
-        fullScoreBufferMeters: 1000,
+        fullScoreBufferMeters: 5000,
         penaltyStepMeters: 1000,
     },
 
     "Jaunākā UNESCO Pasaules mantojuma vieta Latvijā": {
-        fullScoreBufferMeters: 1000,
+        fullScoreBufferMeters: 5000,
         penaltyStepMeters: 1000,
     },
 
@@ -117,8 +117,8 @@ window.ARCGIGUESS_CONFIG = {
     },
 
     "Daugavas loki": {
-        fullScoreBufferMeters: 1000,
-        penaltyStepMeters: 1000,
+        fullScoreBufferMeters: 5000,
+        penaltyStepMeters: 500,
     },
 },
     noFullScoreBufferLandmarks: [
@@ -186,7 +186,7 @@ startButton:
    distanceTitles: {
   veryClose: "Gandrīz izdevās!",
   close: "Labs minējums, esi tuvu!",
-  medium: "Virziens ir labs, precizē atrašanās vietu!",
+  medium: "Labs minējums, esi tuvu!",
   far: "😔",
   veryFar: "😔"
 },
@@ -204,7 +204,7 @@ startButton:
                     "Nospied vēlreiz, lai noslēgtu spēli",
 
                 gameOverButton:
-                    "Vai Latviju pazīstu labi?",
+                    "Aplūkot kā man veicās!",
 
                 /* GAME OVER */
 
@@ -221,7 +221,7 @@ startButton:
                     "Precizitāte",
 
                 foundLabel:
-                    "Vietas atrastas",
+                    "Precīzi atrastās vietas",
 
                 playAgainButton:
                     "Spēlēt vēlreiz",
