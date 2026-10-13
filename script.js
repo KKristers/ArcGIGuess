@@ -2631,6 +2631,43 @@ function shouldUseFullScoreBuffer( landmark ) {
 
     return !isExcluded;
 }
+         function getCustomScoringRule( landmark ) {
+    const rules = CONFIG.customScoringRules || {};
+    const currentName = normalizeLandmarkName( getLandmarkName( landmark ) );
+
+    for ( const [ name, rule ] of Object.entries( rules ) ) {
+        if ( normalizeLandmarkName( name ) === currentName ) {
+            return rule;
+        }
+    }
+
+    return null;
+}
+
+function calculateCustomScore( distanceMeters, rule, scoring ) {
+    const maxScore = scoring.pointsForHit || 10;
+    const minScore = scoring.minScore || 0;
+
+    if (
+        typeof distanceMeters !== "number" ||
+        !Number.isFinite( distanceMeters )
+    ) {
+        return minScore;
+    }
+
+    const fullScoreBufferMeters = Number( rule.fullScoreBufferMeters || 0 );
+    const penaltyStepMeters = Number( rule.penaltyStepMeters || scoring.bucketMeters || 500 );
+
+    if ( distanceMeters <= fullScoreBufferMeters ) {
+        return maxScore;
+    }
+
+    const penaltyDistance = distanceMeters - fullScoreBufferMeters;
+    const penaltySteps = Math.ceil( penaltyDistance / penaltyStepMeters );
+    const score = maxScore - penaltySteps;
+
+    return Math.max( minScore, score );
+}
 
             function getDistanceMeters(
                 targetGeometry,
@@ -2945,100 +2982,49 @@ const hasFullScoreBuffer =
                         Number.POSITIVE_INFINITY;
                 }
 
-                let roundScore;
+               let roundScore;
 
-                /*
-                 * Punktu loģika:
-                 *
-                 * 1. Ja klikšķis ir poligonā = 10 punkti visiem objektiem.
-                 *
-                 * 2. Mazajiem objektiem:
-                 *    līdz 500 m no poligona = 10 punkti.
-                 *
-                 * 3. Lielajiem objektiem:
-                 *    tiklīdz iziet ārpus poligona, sākas sods:
-                 *    1-500 m = 9 punkti.
-                 */
+const customScoringRule = getCustomScoringRule( targetLandmark );
 
-                      if ( isInside ) {
+if ( isInside ) {
+    roundScore = scoring.pointsForHit;
+} else if ( !Number.isFinite( distanceInMeters ) ) {
+    roundScore = scoring.minScore;
+} else if ( customScoringRule ) {
+    roundScore = calculateCustomScore(
+        distanceInMeters,
+        customScoringRule,
+        scoring
+    );
 
-            roundScore =
-                scoring.pointsForHit;
+    console.log(
+        "CUSTOM SCORING:",
+        getLandmarkName( targetLandmark ),
+        "distance =",
+        Math.round( distanceInMeters ),
+        "buffer =",
+        customScoringRule.fullScoreBufferMeters,
+        "step =",
+        customScoringRule.penaltyStepMeters,
+        "score =",
+        roundScore
+    );
+} else {
+    const bandsBeyondBuffer = Math.max(
+        0,
+        Math.ceil(
+            ( distanceInMeters - scoring.bucketMeters ) /
+                scoring.bucketMeters
+        )
+    );
 
-        } else if (
-            !Number.isFinite(
-                distanceInMeters
-            )
-        ) {
+    const penalty = bandsBeyondBuffer * scoring.penaltyPerBucket;
 
-            roundScore =
-                scoring.minScore;
-
-        } else if (
-            isBufferedScoringLandmark(
-                targetLandmark
-            )
-        ) {
-
-            console.log(
-                "SPECIAL SCORING:",
-                getLandmarkName(
-                    targetLandmark
-                ),
-                "distance =",
-                Math.round(
-                    distanceInMeters
-                )
-            );
-
-            /*
-                Īpašā loģika:
-                Staburags, Ventas rumba, Aglonas bazilika
-
-                0-1000 m no poligona = 10 punkti
-                1001-2000 m = 9 punkti
-                2001-3000 m = 8 punkti
-                utt.
-            */
-            roundScore =
-                calculateBufferedPolygonScore(
-                    distanceInMeters
-                );
-
-        } else if (
-            hasFullScoreBuffer
-        ) {
-
-            /*
-                Esošā loģika pārējiem mazajiem objektiem:
-                0-500 m ārpus poligona = 10 punkti
-                501-1000 m = 9 punkti
-                1001-1500 m = 8 punkti
-            */
-            const bandsBeyondBuffer =
-                Math.max(
-                    0,
-                    Math.ceil(
-                        (
-                            distanceInMeters -
-                            scoring.bucketMeters
-                        ) /
-                        scoring.bucketMeters
-                    )
-                );
-
-            const penalty =
-                bandsBeyondBuffer *
-                scoring.penaltyPerBucket;
-
-            roundScore =
-                Math.max(
-                    scoring.minScore,
-                    scoring.pointsForHit -
-                    penalty
-                );
-
-        } else {
+    roundScore = Math.max(
+        scoring.minScore,
+        scoring.pointsForHit - penalty
+    );
+} else {
 
             /*
                 Esošā loģika lielajiem objektiem:
