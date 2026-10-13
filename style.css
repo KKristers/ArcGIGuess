@@ -124,3 +124,6 @@ body,
         grid-template-columns: 1fr !important; /* Force 1 column */
     }
 }
+#landmark-name {
+    color: #397d68 !important;
+}
