@@ -178,7 +178,7 @@ $arcgis
              * ================================================================= */
 
             const IMAGERY_ZOOM =
-    18;
+    16;
 
 console.log(
     "SCRIPT TEST: IMAGERY_ZOOM =",
