@@ -217,7 +217,7 @@ startButton:
                     "Paldies par piedalīšanos!",
 
                 finalScoreText:
-                    "Lūk, tavi rezultāti:",
+                    "Lūk, Tavi rezultāti:",
 
                 totalScoreLabel:
                     "Kopējais punktu skaits",
