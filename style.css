@@ -155,3 +155,7 @@ body,
 #landmark-name {
     color: #397d68 !important;
 }
+#game-over-panel #found-label,
+#game-over-panel #found-count {
+    color: #1f2937 !important;
+}
