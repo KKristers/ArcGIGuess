@@ -98,10 +98,10 @@ body,
 }
 
 .btn-confirm {
-    background-color: #397d68;
+    background-color: #a6c48a;
 }
 .btn-confirm:hover {
-    background-color: #2f6a58;
+    background-color: #84ae5e;
 }
 #submit-score-button {
     background-color: #e66f50 !important;
@@ -157,7 +157,6 @@ body,
 
 #landmark-name {
     color: #397d68 !important;
-}
 }
 #landmark-name {
     color: #397d68 !important;
