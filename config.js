@@ -34,9 +34,14 @@ window.ARCGIGUESS_CONFIG = {
     shuffleLandmarks: true,
 
     // Atļaut pabeigt spēli ātrāk
-    allowFinishEarly: false,
-   customLandmarkPrompts: {
-  
+allowFinishEarly: false,
+
+customLandmarkPrompts: {
+
+},
+
+customImagePositions: {
+    "Jaunākā UNESCO Pasaules mantojuma vieta Latvijā": "center 80%",
 },
     /* -------------------------------------------------------------------------
      * 3. SCORING
