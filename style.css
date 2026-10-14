@@ -123,7 +123,9 @@ body,
     #game-over-panel .grid {
         grid-template-columns: 1fr !important; /* Force 1 column */
     }
-    /* Game over result blocks */
+}
+
+/* Game over result blocks */
 #game-over-panel .bg-blue-100 {
     background-color: #79786b !important;
 }
@@ -137,13 +139,17 @@ body,
 }
 
 /* Game over result block text */
-#total-score-label,
-#total-score,
-#accuracy-label,
-#accuracy,
-#found-label,
-#found-count {
+#game-over-panel #total-score-label,
+#game-over-panel #total-score,
+#game-over-panel #accuracy-label,
+#game-over-panel #accuracy,
+#game-over-panel #found-label,
+#game-over-panel #found-count {
     color: #ffffff !important;
+}
+
+#landmark-name {
+    color: #397d68 !important;
 }
 }
 #landmark-name {
