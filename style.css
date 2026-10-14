@@ -98,10 +98,17 @@ body,
 }
 
 .btn-confirm {
-    background-color: #e66f50;
+    background-color: #397d68;
 }
 .btn-confirm:hover {
-    background-color: #cf5f43;
+    background-color: #2f6a58;
+}
+#submit-score-button {
+    background-color: #e66f50 !important;
+}
+
+#submit-score-button:hover {
+    background-color: #cf5f43 !important;
 }
 
 /* Landmark image (shown in the game panel) */
