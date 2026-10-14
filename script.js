@@ -2107,6 +2107,10 @@ console.log(
 );
 
 const imageUrl = getLandmarkPhoto( landmark );
+             const imagePosition =
+    getCustomImagePosition(
+        landmark
+    );
              
 updateFindLandmarkTextVisibility();
 
@@ -2169,7 +2173,8 @@ if ( $("landmark-name") ) {
                                 );
                             }
                         };
-
+imageElements.image.style.objectPosition =
+    imagePosition || "";
                     imageElements.image.src =
                         imageUrl;
 
