@@ -62,7 +62,7 @@ customImagePositions: {
     },
     customScoringRules: {
     "Rīgas Brāļu kapi": {
-        fullScoreBufferMeters: 5000,
+        fullScoreBufferMeters: 0,
         penaltyStepMeters: 500,
     },
 
@@ -82,42 +82,42 @@ customImagePositions: {
     },
 
     "Vecākais dabas rezervāts Latvijā (Moricsala)": {
-        fullScoreBufferMeters: 5000,
+        fullScoreBufferMeters: 0,
         penaltyStepMeters: 500,
     },
 
     "Rundāles pils": {
-        fullScoreBufferMeters: 5000,
+        fullScoreBufferMeters: 0,
         penaltyStepMeters: 500,
     },
 
     "Aglonas bazilika": {
-        fullScoreBufferMeters: 5000,
+        fullScoreBufferMeters: 0,
         penaltyStepMeters: 500,
     },
 
     "Āraišu ezerpils": {
-        fullScoreBufferMeters: 5000,
+        fullScoreBufferMeters: 0,
         penaltyStepMeters: 500,
     },
 
     "Staburags": {
-        fullScoreBufferMeters: 5000,
+        fullScoreBufferMeters: 0,
         penaltyStepMeters: 500,
     },
 
     "Strūves ģeodēziskā loka UNESCO punkts “Sestu kalns”": {
-        fullScoreBufferMeters: 5000,
+        fullScoreBufferMeters: 0,
         penaltyStepMeters: 500,
     },
 
     "Latvijas tālākais austrumu punkts “Austras koks”": {
-        fullScoreBufferMeters: 5000,
+        fullScoreBufferMeters: 0,
         penaltyStepMeters: 500,
     },
 
     "Ziemassvētku kauju muzejs": {
-        fullScoreBufferMeters: 5000,
+        fullScoreBufferMeters: 0,
         penaltyStepMeters: 500,
     },
 
