@@ -197,7 +197,7 @@ startButton:
 },
 
                 incorrectMessage:
-                    "Tu biji <strong>{distance} m</strong> attālumā no precīzās vietas. Tu nopelnīji <strong>{roundScore} punktus</strong>. Šī ir precīzā atrašanās vieta.",
+                    "Tavs minējums ir <strong>{distance} m</strong> attālumā no precīzās vietas. Tu nopelnīji <strong>{roundScore} punktus</strong>. Šī ir precīzā atrašanās vieta.",
 
                 nextButton:
                     "Nākamā vieta",
