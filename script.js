@@ -1381,6 +1381,44 @@ function getCustomLandmarkPrompt(
 
     return null;
 }
+         function getCustomImagePosition( landmark ) {
+    const positions =
+        CONFIG.customImagePositions || {};
+
+    const name =
+        getLandmarkName(
+            landmark
+        );
+
+    const normalizedName =
+        String(
+            name || ""
+        )
+            .trim()
+            .toLowerCase();
+
+    for (
+        const [ key, value ] of Object.entries(
+            positions
+        )
+    ) {
+        const normalizedKey =
+            String(
+                key || ""
+            )
+                .trim()
+                .toLowerCase();
+
+        if (
+            normalizedKey ===
+            normalizedName
+        ) {
+            return value;
+        }
+    }
+
+    return null;
+}
             function getLandmarkPhoto(
                 feature
             ) {
