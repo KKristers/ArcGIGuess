@@ -123,6 +123,28 @@ body,
     #game-over-panel .grid {
         grid-template-columns: 1fr !important; /* Force 1 column */
     }
+    /* Game over result blocks */
+#game-over-panel .bg-blue-100 {
+    background-color: #79786b !important;
+}
+
+#game-over-panel .bg-green-100 {
+    background-color: #abaa93 !important;
+}
+
+#game-over-panel .bg-amber-100 {
+    background-color: #c7ccb2 !important;
+}
+
+/* Game over result block text */
+#total-score-label,
+#total-score,
+#accuracy-label,
+#accuracy,
+#found-label,
+#found-count {
+    color: #ffffff !important;
+}
 }
 #landmark-name {
     color: #397d68 !important;
