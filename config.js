@@ -303,10 +303,10 @@ startButton:
             "Atrodi vietu. Atceries vēsturi. Pārbaudi sevi! Mēs parādīsim vēsturiskas vietas nosaukumu un attēlu.",
 
         image:
-            "https://KKristers.github.io/ArcGIGuess/assets/gisday2026.png",
+            "https://kkristers.github.io/ArcGIGuess/assets/gisday2026.png",
 
         url:
-            "https://KKristers.github.io/ArcGIGuess",
+            "https://kkristers.github.io/ArcGIGuess",
 
         twitterHandle:
             "",
