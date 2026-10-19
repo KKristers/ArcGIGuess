@@ -306,7 +306,7 @@ startButton:
             "https://kkristers.github.io/ArcGIGuess/assets/gisday2026.png",
 
         url:
-            "https://kkristers.github.io/ArcGIGuess",
+            "https://kkristers.github.io/ArcGIGuess/",
 
         twitterHandle:
             "",
