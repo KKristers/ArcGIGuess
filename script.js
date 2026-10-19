@@ -396,9 +396,6 @@ function updateBasemapForZoom( zoom ) {
         return;
     }
 
-    const IMAGERY_ZOOM =
-        13;
-
     console.log(
         "ZOOM SWITCH:",
         "zoom =",
@@ -409,14 +406,19 @@ function updateBasemapForZoom( zoom ) {
         currentBasemapType
     );
 
-    if ( zoom < IMAGERY_ZOOM ) {
+    if (
+        zoom < IMAGERY_ZOOM
+    ) {
 
         console.log(
-            "BASEMAP BRANCH -> CUSTOM"
+            "BASEMAP BRANCH -> DEFAULT LAYER"
         );
 
-        if ( currentBasemapType !== "osm" ) {
-            // setOpenStreetMap().catch(console.error);
+        if (
+            currentBasemapType !==
+            "default"
+        ) {
+            setDefaultMapView();
         }
 
         return;
@@ -426,7 +428,10 @@ function updateBasemapForZoom( zoom ) {
         "BASEMAP BRANCH -> IMAGERY"
     );
 
-    if ( currentBasemapType !== "imagery" ) {
+    if (
+        currentBasemapType !==
+        "imagery"
+    ) {
         setWorldImagery();
     }
 }
