@@ -459,7 +459,7 @@ function updateBasemapForZoom( zoom ) {
                     "Setting up basemap switching..."
                 );
 
-setOpenStreetMap().catch(console.error);
+// setOpenStreetMap().catch(console.error);
                 const waitForZoom =
                     () => {
 
@@ -1896,7 +1896,7 @@ currentBasemapType =
                         mapEl.view.zoom
                     );
 
-                    // setupBasemapSwitching();
+                    setupBasemapSwitching();
 
                     await loadGameData();
 
