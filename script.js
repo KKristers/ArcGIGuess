@@ -1821,7 +1821,7 @@ function getCustomLandmarkPrompt(
                         mapEl.view.zoom
                     );
 
-                    setupBasemapSwitching();
+                    // setupBasemapSwitching();
 
                     await loadGameData();
 
