@@ -152,7 +152,7 @@ customImagePositions: {
                     "Laipni lūdzam spēlē <br>“Vietas, ko atcerēties!”",
 
                 welcomeDesc:
-                    "Novembrī tiek atzīmēta ĢIS diena! Svinēsim to kopā! Pārbaudi sevi un atrodi nosauktās vietas Latvijas kartē!<br><br>{scoringSummary}<br><br><strong>Ja esi skolēns – pēc spēles pabeigšanas iesniedz rezultātus, aizpildot anketu. Aktīvākās klases saņems sveicienu no Envirotech.<br><br>Sveiciens valsts svētku un ĢIS dienas mēnesī!</strong>",
+                    "Pārbaudi sevi un atrodi nosauktās vietas Latvijas kartē!<br><br>{scoringSummary}<br><br><strong>Ja esi skolēns – pēc spēles pabeigšanas iesniedz rezultātus, aizpildot anketu. Aktīvākās klases saņems sveicienu no Envirotech.<br><br>Sveiciens valsts svētku un ĢIS dienas mēnesī!</strong>",
 
 
                scoringSummaryTemplate:
