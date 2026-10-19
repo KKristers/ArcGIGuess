@@ -184,7 +184,8 @@ console.log(
     "SCRIPT TEST: IMAGERY_ZOOM =",
     IMAGERY_ZOOM
 );
-const CUSTOM_VECTOR_BASEMAP_ITEM_ID = "87874c36d07c45daae73bca3354674a2";
+let defaultBasemap = 
+ null;
             let currentBasemapType =
                 null;
 
