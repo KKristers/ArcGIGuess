@@ -184,13 +184,19 @@ console.log(
     "SCRIPT TEST: IMAGERY_ZOOM =",
     IMAGERY_ZOOM
 );
-let defaultBasemap = 
- null;
-            let currentBasemapType =
-                null;
+const DEFAULT_BASEMAP_LAYER_TITLE =
+    "ģis diena 2026";
+         let defaultBasemapLayer =
+    null;
 
-            let basemapSwitchingReady =
-                false;
+let defaultWebMapBasemap =
+    null;
+
+let currentBasemapType =
+    null;
+
+let basemapSwitchingReady =
+    false;
          /* =================================================================
  * SPECIAL SCORING
  * ================================================================= */
@@ -216,7 +222,36 @@ const BUFFERED_SCORING_LANDMARKS =
                     "Using ArcGIS Online basemap IDs."
                 );
             }
+function setDefaultMapView() {
 
+    if (
+        !mapEl ||
+        !mapEl.map
+    ) {
+        return;
+    }
+
+    if (
+        defaultWebMapBasemap
+    ) {
+        mapEl.map.basemap =
+            defaultWebMapBasemap;
+    }
+
+    if (
+        defaultBasemapLayer
+    ) {
+        defaultBasemapLayer.visible =
+            true;
+    }
+
+    currentBasemapType =
+        "default";
+
+    console.log(
+        "BASEMAP -> Default Web Map layer"
+    );
+}
 async function setOpenStreetMap() {
 
     if (
@@ -321,22 +356,28 @@ async function setOpenStreetMap() {
                     mapEl.map.basemap =
                         basemap;
 
-                    currentBasemapType =
-                        "imagery";
+                      if (
+            defaultBasemapLayer
+        ) {
+            defaultBasemapLayer.visible =
+                false;
+        }
 
-                    console.log(
-                        "BASEMAP -> Imagery Hybrid"
-                    );
+        currentBasemapType =
+            "imagery";
 
-                } catch (error) {
+        console.log(
+            "BASEMAP -> Imagery Hybrid"
+        );
 
-                    console.error(
-                        "Imagery Hybrid basemap error:",
-                        error
-                    );
-                }
-            }
+    } catch (error) {
 
+        console.error(
+            "Imagery Hybrid basemap error:",
+            error
+        );
+    }
+}
 function updateBasemapForZoom( zoom ) {
 
     if (
@@ -375,7 +416,7 @@ function updateBasemapForZoom( zoom ) {
         );
 
         if ( currentBasemapType !== "osm" ) {
-            setOpenStreetMap().catch(console.error);
+            // setOpenStreetMap().catch(console.error);
         }
 
         return;
@@ -1780,7 +1821,35 @@ function getCustomLandmarkPrompt(
                         "Original WebMap basemap:",
                         webmap.basemap
                     );
+defaultWebMapBasemap =
+    webmap.basemap;
 
+defaultBasemapLayer =
+    webmap.layers.find(
+        (layer) =>
+            layer.title ===
+            DEFAULT_BASEMAP_LAYER_TITLE
+    );
+
+if (
+    !defaultBasemapLayer
+) {
+    console.warn(
+        "Default basemap layer not found:",
+        DEFAULT_BASEMAP_LAYER_TITLE
+    );
+} else {
+    defaultBasemapLayer.visible =
+        true;
+
+    console.log(
+        "Default basemap layer found:",
+        defaultBasemapLayer.title
+    );
+}
+
+currentBasemapType =
+    "default";
                     landmarksLayer =
                         webmap.layers.find(
                             (layer) =>
